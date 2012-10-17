@@ -24,13 +24,13 @@ body {
 }
 .modal-iframe {
 
-     height: 500px;
-     width : 5000px;
+     height: 450px;
+     width : 600px;
     
   }
   .modal {
-     height: 500px;
-     width : 5000px;
+     height: 580px;
+     width : 800px;
   }
 </style>
 <!-- google map api lib -->
@@ -70,6 +70,10 @@ body {
 </head>
 
 <script type="text/javascript">
+function addMarker(){
+	
+	
+}
 function googlemapInitialize(){
 	// 取得ip位置後，解析經緯度->show在map上  
 	$(function() {
@@ -109,10 +113,6 @@ function googlemapInitialize(){
 		    			  var content = "<div style='width:360px;height:700px;background-color:Yellow'><h3>Hello marker!</h3></div>";
 		    			  google.maps.event.addListener(beachMarker, "click", function() {
 
-		    				  var infowindow = new google.maps.InfoWindow(
-		    					      { content: content,
-		    					        size: new google.maps.Size(25,25)
-		    					      });
 		    				  
 		    				  
 		    				  google.maps.event.addListener(beachMarker, 'click', function() {
@@ -121,7 +121,7 @@ function googlemapInitialize(){
 		    					  $('#myModal').modal('show');
 		    					  
 		    					  });
-
+ 
 		    	            });
 
 		}
