@@ -96,7 +96,7 @@ public class GetPhoto extends HttpServlet {
 		String longitude = URLDecoder.decode(request.getParameter("longitude"),"UTF-8");
 		
 		
-		
+	/*	
 		try {
 			client.ACT001_writeMsg("1 "+latitude+" "+latitude+" "+longitude+" "+longitude+" "+"\n");
 			client.sleep(1000);
@@ -107,6 +107,7 @@ public class GetPhoto extends HttpServlet {
 			e.printStackTrace();
 		}
 		count++;
+		*/
 		System.out.println(count);
 		System.out.println("id: "+id);
 		System.out.println("title: "+title);

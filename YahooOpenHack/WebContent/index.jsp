@@ -155,7 +155,6 @@ function googlemapInitialize(){
 			<input type="text" class="span9"
 				placeholder="place, view, people or anything you want to see">
 			<button id="submit" type="submit" class="btn btn-success">Submit</button>
-			<button id="modaltest" type="submit" class="btn btn-success">modaltest</button>
 		</div>
 	</div>
 
