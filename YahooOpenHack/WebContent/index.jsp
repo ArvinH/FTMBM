@@ -33,6 +33,9 @@ body {
      width : 800px;
   }
 </style>
+
+
+
 <!-- google map api lib -->
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <script type="text/javascript"
@@ -51,7 +54,7 @@ body {
 	DateFormat dateFormat = new SimpleDateFormat("EE-MM-dd-yyyy");
 	String time = dateFormat.format(creationTime);
 	String clientIP = request.getRemoteAddr();
-	if (clientIP.contains("192")) {
+	if (clientIP.contains("192") || clientIP.contains("0:0:0:0:1")) {
 		clientIP = "0";
 	}
 %>
@@ -69,10 +72,35 @@ body {
 	rel='stylesheet' type='text/css'>
 </head>
 
+
+
+<!-- google map javascript -->
 <script type="text/javascript">
-function addMarker(){
-	
-	
+function addMarker(lat,lon){
+	var myLatlng = new google.maps.LatLng(lat, lon);
+	var myOptions = {
+			  zoom: 18,
+			  center: myLatlng,
+			  mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			var map = new google.maps.Map(document.getElementById("map_canvas"),
+				    myOptions);
+	var image = 'img/location.png';
+	  
+	  var beachMarker = new google.maps.Marker({
+	      position: myLatlng,
+	      map: map,
+	      icon: image
+	  });
+	  google.maps.event.addListener(beachMarker, "click", function() { 
+		  google.maps.event.addListener(beachMarker, 'click', function() {
+			  
+			  window.frames["NewFile"].location.href="with-carousel.html";
+			  $('#myModal').modal('show');
+			  
+			  });
+
+      });
 }
 function googlemapInitialize(){
 	// 取得ip位置後，解析經緯度->show在map上  
@@ -90,6 +118,7 @@ function googlemapInitialize(){
 			    			};
 			    			var map = new google.maps.Map(document.getElementById("map_canvas"),
 			    				    myOptions);
+			    			addMarker(data.latitude, data.longitude);
 			    }
 			    	
 			});  
@@ -103,32 +132,14 @@ function googlemapInitialize(){
 		    			};
 		    			var map = new google.maps.Map(document.getElementById("map_canvas"),
 		    				    myOptions);
-		    			var image = 'img/location.png';
-		    			  
-		    			  var beachMarker = new google.maps.Marker({
-		    			      position: myLatlng,
-		    			      map: map,
-		    			      icon: image
-		    			  });
-		    			  var content = "<div style='width:360px;height:700px;background-color:Yellow'><h3>Hello marker!</h3></div>";
-		    			  google.maps.event.addListener(beachMarker, "click", function() {
-
-		    				  
-		    				  
-		    				  google.maps.event.addListener(beachMarker, 'click', function() {
-		    					  
-		    					  window.frames["NewFile"].location.href="with-carousel.html";
-		    					  $('#myModal').modal('show');
-		    					  
-		    					  });
- 
-		    	            });
-
+		    			addMarker('25.0412', '121.5454');			 
 		}
 		});
 	
 }
 </script>
+
+
 
 <!-- html body -->
 
@@ -138,7 +149,7 @@ function googlemapInitialize(){
 	<div id="clientIP" style="display: none"><%=clientIP%></div>
 
 	<!-- 
-	主要啟動功能的button
+	主要啟動功能的button (for test)
 	<input id="get" type="button" value="get" class="btn"/>
 	<input id="getPhotoInfo" type="button" value="getPhotoInfo" class="btn" />
 	<input id="sendToBackend" type="button" value="sendToBackend" class="btn"/>
@@ -155,6 +166,7 @@ function googlemapInitialize(){
 			<input type="text" class="span9"
 				placeholder="place, view, people or anything you want to see">
 			<button id="submit" type="submit" class="btn btn-success">Submit</button>
+			<button id="addMarkerTest" type="button" value="addMarker" class="btn">addMaker</button>
 		</div>
 	</div>
 
@@ -164,7 +176,7 @@ function googlemapInitialize(){
 	
 	
 <!-- modal  -->
-<div class="modal" id="myModal" style="display: none;">
+<div class="modal hide fade in" id="myModal" style="display: none;">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3>Modal Test</h3>
@@ -190,7 +202,9 @@ javascript
 
 <script type="text/javascript">
 	var appid = "63d0f7b2e9592d8f5ad413cc5c60e551";
-
+	$('#addMarkerTest').click(function(){
+		addMarker('25.0415', '121.5457');
+	});
 	
 	$('#submit')
 			.click(
@@ -208,7 +222,7 @@ javascript
 															function() {
 																$
 																		.getJSON(
-																				'http://query.yahooapis.com/v1/public/yql?q=select id,title,location,dates,farm,server,secret from flickr.photos.info where photo_id='
+																				'http://query.yahooapis.com/v1/public/yql?q=select id,title,location.latitude,location.longitude,dates.taken,farm,server,secret from flickr.photos.info where photo_id='
 																						+ data.query.results.photo[i].id
 																						+ ' and api_key=\"'
 																						+ appid
@@ -227,10 +241,10 @@ javascript
 																										takendate : encodeURI(data.query.results.photo.dates.taken),
 																										latitude : encodeURI(data.query.results.photo.location.latitude),
 																										longitude : encodeURI(data.query.results.photo.location.longitude)
+																										
 																									},
-																									function(
-																											data) {
-
+																									function(data) {
+																										
 																									});
 																				});
 																i++;

@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="ext_lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="ext_lib/ezmorph-1.0.6.jar"/>
 	<classpathentry kind="lib" path="ext_lib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="ext_lib/servlet-api-3.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
