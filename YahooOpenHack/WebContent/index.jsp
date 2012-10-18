@@ -15,7 +15,7 @@ body {
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
-	background-image: url(img/background1.jpg);
+	background-image: url(img/retina_wood.png);
 }
 
 #map_canvas {
