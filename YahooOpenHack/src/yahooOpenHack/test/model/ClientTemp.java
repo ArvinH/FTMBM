@@ -1,14 +1,16 @@
 package yahooOpenHack.test.model;
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.LinkedList;
 
 public class ClientTemp extends Thread {
 
 	private Socket clientSocket = null;
+	private String strMessage = null;
+	private LinkedList<String> linkedList = new LinkedList<String>();
 	public ClientTemp(String addr, int port)
 	{
 		this.clientSocket = new Socket();
@@ -23,11 +25,12 @@ public class ClientTemp extends Thread {
 	}
 	public void run() {
         while(this.clientSocket.isConnected()) {
-        	String strMessage = null;
+        	
 	        try {
 	        	DataInputStream reader = new DataInputStream(this.clientSocket.getInputStream());
 	        	while((strMessage = reader.readLine()) != null)
 	        	{
+	        		linkedList.add(strMessage);
 		        	System.out.println(strMessage);
 	        	}
 			} catch (IOException e) {
@@ -36,6 +39,10 @@ public class ClientTemp extends Thread {
 			}
         }
     }
+	public LinkedList<String> getMsg(){
+		
+		return linkedList;
+	}
 	public void ACT001_writeMsg(String msg)
 	{
 		try {

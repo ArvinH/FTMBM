@@ -77,33 +77,28 @@ body {
 <!-- google map javascript -->
 <script type="text/javascript">
 
+var map;
 
-
-
-function addMarker(map,lat,lon){
-	var myLatlng = new google.maps.LatLng(lat, lon);
-	var myOptions = {
-			  zoom: 18,
-			  center: myLatlng,
-			  mapTypeId: google.maps.MapTypeId.ROADMAP
-			};
-			
+function addMarker(map,lat,lon,imgUrl){
+	var myLatlng = new google.maps.LatLng(lat, lon);	
 	var image = 'img/location.png';
 	  
-	  var beachMarker = new google.maps.Marker({
+	  var Marker = new google.maps.Marker({
+		  animation: google.maps.Animation.DROP,
 	      position: myLatlng,
-	      map: map,
 	      icon: image
 	  });
-	  
-	  
-	  
-	  google.maps.event.addListener(beachMarker, "click", function() { 
-			  
-			  window.frames["NewFile"].location.href="with-carousel.html";
+	  map.setCenter(myLatlng);
+	  Marker.setMap(map);
+
+	  google.maps.event.addListener(Marker, "click", function() { 
+		 
+			  window.frames["photoSlide"].location.href="photoSlide.jsp?imgUrl="+imgUrl;
 			  $('#myModal').modal('show');
 			  
       });
+	  
+	  
 }
 function googlemapInitialize(){
 	// 取得ip位置後，解析經緯度->show在map上  
@@ -121,7 +116,7 @@ function googlemapInitialize(){
 			    			};
 			    			var map = new google.maps.Map(document.getElementById("map_canvas"),
 			    				    myOptions);
-			    			addMarker(map,data.latitude, data.longitude);
+			    			addMarker(map,data.latitude, data.longitude,"http://farm9.staticflickr.com/8053/8086192864_256d21bdc5.jpg");
 			    }
 			    	
 			});  
@@ -133,9 +128,9 @@ function googlemapInitialize(){
 		    			  center: myLatlng,
 		    			  mapTypeId: google.maps.MapTypeId.ROADMAP
 		    			};
-		    			var map = new google.maps.Map(document.getElementById("map_canvas"),
+		    			 map = new google.maps.Map(document.getElementById("map_canvas"),
 		    				    myOptions);
-		    			addMarker(map,'25.0412', '121.5454');			 
+		    			addMarker(map,'25.0412', '121.5454',"http://farm9.staticflickr.com/8053/8086192864_256d21bdc5.jpg");			 
 		}
 		});
 	
@@ -150,16 +145,6 @@ function googlemapInitialize(){
 
 
 	<div id="clientIP" style="display: none"><%=clientIP%></div>
-
-	<!-- 
-	主要啟動功能的button (for test)
-	<input id="get" type="button" value="get" class="btn"/>
-	<input id="getPhotoInfo" type="button" value="getPhotoInfo" class="btn" />
-	<input id="sendToBackend" type="button" value="sendToBackend" class="btn"/>
-	<input id="getServlet" type="button" value="getServlet" class="btn"/>
-	<input id="sendToBackend" type="button" value="sendToBackend" class="btn"/>
-	<div id="msg"></div>
--->
 	<div style="text-align: center; position: relative; Top: 10%">
 		<h3 style="font-family: 'Arizonia', cursive; font-size: 64px">Feel
 			the most beautiful moment</h3>
@@ -185,7 +170,7 @@ function googlemapInitialize(){
     <h3>Modal Test</h3>
   </div>
   <div class="modal-iframe">
-  <iframe class="modal-iframe" name="NewFile" src="about:blank" frameborder="0"></iframe>
+  <iframe class="modal-iframe" name="photoSlide" src="about:blank" frameborder="0"></iframe>
   </div>
   <div class="modal-footer" style="text-align:center">
   </div>
@@ -206,8 +191,10 @@ javascript
 <script type="text/javascript">
 	var appid = "63d0f7b2e9592d8f5ad413cc5c60e551";
 	$('#addMarkerTest').click(function(){
-		addMarker('25.0415', '121.5457');
+		$.get('getphoto.do',{},function(data){});
 	});
+		
+
 	
 	$('#submit')
 			.click(
@@ -217,24 +204,19 @@ javascript
 								.getJSON(
 										'http://query.yahooapis.com/v1/public/yql?q=select * from flickr.photos.search(0) where text=\"sunrise\" and has_geo=1 and lat=22.993299484253 and lon=120.20359802246 and content_type=1 and api_key=\"'
 												+ appid
-												+ '\" and radius=20 &format=json',
+												+ '\" and radius=20 limit 5&format=json',
 										function(data) {
-											$
-													.each(
-															data.query.results.photo,
-															function() {
-																$
-																		.getJSON(
-																				'http://query.yahooapis.com/v1/public/yql?q=select id,title,location.latitude,location.longitude,dates.taken,farm,server,secret from flickr.photos.info where photo_id='
+											$.each(
+													data.query.results.photo,
+													function() {
+																$.getJSON(
+																		'http://query.yahooapis.com/v1/public/yql?q=select id,title,location.latitude,location.longitude,dates.taken,farm,server,secret from flickr.photos.info where photo_id='
 																						+ data.query.results.photo[i].id
 																						+ ' and api_key=\"'
 																						+ appid
 																						+ '\"&format=json',
-																				function(
-																						data) {
-																					$
-																							.post(
-																									'getphoto.do',
+																				function(data) {
+																					$.post('getphoto.do',
 																									{
 																										id : encodeURI(data.query.results.photo.id),
 																										title : encodeURI(data.query.results.photo.title),
@@ -246,9 +228,11 @@ javascript
 																										longitude : encodeURI(data.query.results.photo.location.longitude)
 																										
 																									},
-																									function(data) {
+																									function(Result) {
 																										
+																										addMarker(map,Result.latitude,Result.longitude,Result.imgUrl);
 																									});
+																					
 																				});
 																i++;
 															});
