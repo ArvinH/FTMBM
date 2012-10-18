@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import yahooOpenHack.test.model.ClientTemp;
+import yahooOpenHack.test.model.Constant;
 import yahooOpenHack.test.model.GetJSONResult;
 import yahooOpenHack.test.model.SendAPIQuery;
 
@@ -25,17 +26,17 @@ import net.sf.json.JSONObject;
 /**
  * Servlet implementation class GetIP_Location
  */
-@SuppressWarnings("restriction")
+
 @WebServlet("/GetIP_Location")
 public class GetPhoto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	//ClientTemp client = new ClientTemp("192.168.11.3", 9999);
+	ClientTemp client = new ClientTemp("192.168.11.2", Constant.PORT);
 	int count;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public GetPhoto() {
-    //	client.ACT001_writeMsg("0\n");
+    	client.ACT001_writeMsg("0\n");
     }
 
 	/**
@@ -94,20 +95,13 @@ public class GetPhoto extends HttpServlet {
 		String takendate = URLDecoder.decode(request.getParameter("takendate"),"UTF-8");
 		String latitude = URLDecoder.decode(request.getParameter("latitude"),"UTF-8");
 		String longitude = URLDecoder.decode(request.getParameter("longitude"),"UTF-8");
+		String imgUrl = "http://farm"+farm+".statickflickr.com/"+server+"/"+id+"_"+secret+".jpg";
+
+			client.ACT001_writeMsg("1#"+latitude+"#"+latitude+"#"+longitude+"#"+longitude+"#"+id+"#"+takendate+"#"+imgUrl+"#"+title+"\n");
 		
+			client.ACT001_writeMsg("2#"+latitude+"#"+latitude+"#"+longitude+"#"+longitude+"#"+"\n");
 		
-	/*	
-		try {
-			client.ACT001_writeMsg("1 "+latitude+" "+latitude+" "+longitude+" "+longitude+" "+"\n");
-			client.sleep(1000);
-			client.ACT001_writeMsg("2 "+latitude+" "+latitude+" "+longitude+" "+longitude+" "+"\n");
-			client.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		count++;
-		*/
 		System.out.println(count);
 		System.out.println("id: "+id);
 		System.out.println("title: "+title);

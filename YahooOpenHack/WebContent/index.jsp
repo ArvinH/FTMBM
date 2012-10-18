@@ -76,15 +76,18 @@ body {
 
 <!-- google map javascript -->
 <script type="text/javascript">
-function addMarker(lat,lon){
+
+
+
+
+function addMarker(map,lat,lon){
 	var myLatlng = new google.maps.LatLng(lat, lon);
 	var myOptions = {
 			  zoom: 18,
 			  center: myLatlng,
 			  mapTypeId: google.maps.MapTypeId.ROADMAP
 			};
-			var map = new google.maps.Map(document.getElementById("map_canvas"),
-				    myOptions);
+			
 	var image = 'img/location.png';
 	  
 	  var beachMarker = new google.maps.Marker({
@@ -92,14 +95,14 @@ function addMarker(lat,lon){
 	      map: map,
 	      icon: image
 	  });
+	  
+	  
+	  
 	  google.maps.event.addListener(beachMarker, "click", function() { 
-		  google.maps.event.addListener(beachMarker, 'click', function() {
 			  
 			  window.frames["NewFile"].location.href="with-carousel.html";
 			  $('#myModal').modal('show');
 			  
-			  });
-
       });
 }
 function googlemapInitialize(){
@@ -118,7 +121,7 @@ function googlemapInitialize(){
 			    			};
 			    			var map = new google.maps.Map(document.getElementById("map_canvas"),
 			    				    myOptions);
-			    			addMarker(data.latitude, data.longitude);
+			    			addMarker(map,data.latitude, data.longitude);
 			    }
 			    	
 			});  
@@ -132,7 +135,7 @@ function googlemapInitialize(){
 		    			};
 		    			var map = new google.maps.Map(document.getElementById("map_canvas"),
 		    				    myOptions);
-		    			addMarker('25.0412', '121.5454');			 
+		    			addMarker(map,'25.0412', '121.5454');			 
 		}
 		});
 	
@@ -176,7 +179,7 @@ function googlemapInitialize(){
 	
 	
 <!-- modal  -->
-<div class="modal hide fade in" id="myModal" style="display: none;">
+<div class="modal hide fade in" id="myModal"  style="display: none;" >
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3>Modal Test</h3>

@@ -1,8 +1,7 @@
 package yahooOpenHack.test.model;
-import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -24,17 +23,14 @@ public class ClientTemp extends Thread {
 	}
 	public void run() {
         while(this.clientSocket.isConnected()) {
-			byte byte_buffer[] = new byte[2000];
+        	String strMessage = null;
 	        try {
-	        	InputStream reader = this.clientSocket.getInputStream();
-	        	int inputLength = reader.read(byte_buffer);
-	        	String strMessage = new String(byte_buffer,0,inputLength - 1);
-				System.out.println(strMessage);
-				sleep(20);
+	        	DataInputStream reader = new DataInputStream(this.clientSocket.getInputStream());
+	        	while((strMessage = reader.readLine()) != null)
+	        	{
+		        	System.out.println(strMessage);
+	        	}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -51,27 +47,20 @@ public class ClientTemp extends Thread {
 			e.printStackTrace();
 		}
 	}
-	/*
 	public static void main(String[] args) {
-		ClientTemp client = new ClientTemp("127.0.0.1", 9999);
-		try {
-			Thread.sleep(1000);
-			client.ACT001_writeMsg("0\n");
-			Thread.sleep(1000);
-			client.ACT001_writeMsg("1 0 0 0 0\n");
-			Thread.sleep(1000);
-			client.ACT001_writeMsg("1 2 2 2 2\n");
-			Thread.sleep(1000);
-			client.ACT001_writeMsg("1 1 2 1 2\n");
-			Thread.sleep(1000);
-			client.ACT001_writeMsg("1 6 7 6 7\n");
-			Thread.sleep(1000);
-			client.ACT001_writeMsg("2 0 0 3 3\n");
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}*/
-
+		ClientTemp client = new ClientTemp("127.0.0.1", Constant.PORT);
+		client.ACT001_writeMsg("0\n");
+		client.ACT001_writeMsg("1#0#0#0#0#0xASJDJFFF001#2001/5/6#http://apple.com#cat\n");
+		client.ACT001_writeMsg("1#2#2#2#2#0xASJDJFFF001#2051/5/6#http://www.google.com.tw#car\n");
+		client.ACT001_writeMsg("1#1#2#1#2#0xASJDJFFF001#2601/5/6#http://www.google.com.tw#tree\n");
+		client.ACT001_writeMsg("1#6#7#6#7#0xASJDJFFF001#20331/5/6#http://www.google.com.tw#pig\n");
+		client.ACT001_writeMsg("1#6#6#6#6#0xASJDJFFF001#25601/5/6#http://www.google.com.tw#sun\n");
+		client.ACT001_writeMsg("2#6#6#10.4#10.4\n");
+		client.ACT001_writeMsg("1#0#0#0#0#0xASJDJFFF001#2001/5/6#http://apple.com#cat\n");
+		client.ACT001_writeMsg("1#2#2#2#2#0xASJDJFFF001#2051/5/6#http://www.google.com.tw#car\n");
+		client.ACT001_writeMsg("1#1#2#1#2#0xASJDJFFF001#2601/5/6#http://www.google.com.tw#tree\n");
+		client.ACT001_writeMsg("1#6#7#6#7#0xASJDJFFF001#20331/5/6#http://www.google.com.tw#pig\n");
+		client.ACT001_writeMsg("1#6#6#6#6#0xASJDJFFF001#25601/5/6#http://www.google.com.tw#sun\n");
+		client.ACT001_writeMsg("2#0#0#4#4\n");
+	}
 }
