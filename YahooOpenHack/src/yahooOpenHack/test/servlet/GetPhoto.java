@@ -29,13 +29,13 @@ import net.sf.json.JSONObject;
 @WebServlet("/GetIP_Location")
 public class GetPhoto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	ClientTemp client = new ClientTemp("192.168.11.3", 9999);
+	//ClientTemp client = new ClientTemp("192.168.11.3", 9999);
 	int count;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public GetPhoto() {
-    	client.ACT001_writeMsg("0\n");
+    //	client.ACT001_writeMsg("0\n");
     }
 
 	/**
