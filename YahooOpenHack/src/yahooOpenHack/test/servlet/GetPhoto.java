@@ -41,7 +41,7 @@ public class GetPhoto extends HttpServlet {
 	String latitude = null;
 	String longitude = null;
 	String imgUrl = null;
-	ClientTemp client = new ClientTemp("192.168.11.3", Constant.PORT);
+	ClientTemp client = new ClientTemp("192.168.11.38", Constant.PORT);
     /**
      * @see HttpServlet#HttpServlet()
      */
