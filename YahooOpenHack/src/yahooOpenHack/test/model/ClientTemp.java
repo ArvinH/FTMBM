@@ -6,11 +6,14 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.LinkedList;
 
+import net.sf.json.JSONObject;
+
 public class ClientTemp extends Thread {
 
 	private Socket clientSocket = null;
 	private String strMessage = null;
 	private LinkedList<String> linkedList = new LinkedList<String>();
+	private int count = 0;
 	public ClientTemp(String addr, int port)
 	{
 		this.clientSocket = new Socket();
@@ -42,6 +45,10 @@ public class ClientTemp extends Thread {
 	public LinkedList<String> getMsg(){
 		
 		return linkedList;
+	}
+	public void clearLinkedList(){
+		linkedList.clear();
+		count = 0;
 	}
 	public void ACT001_writeMsg(String msg)
 	{

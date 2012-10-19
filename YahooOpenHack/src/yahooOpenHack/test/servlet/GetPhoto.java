@@ -31,6 +31,7 @@ import net.sf.json.JSONObject;
 @WebServlet("/GetIP_Location")
 public class GetPhoto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private JSONArray ResultArray = new JSONArray();
 	String id = null;
 	String title = null;
 	String farm = null;
@@ -40,12 +41,12 @@ public class GetPhoto extends HttpServlet {
 	String latitude = null;
 	String longitude = null;
 	String imgUrl = null;
-//	ClientTemp client = new ClientTemp("192.168.11.2", Constant.PORT);
+	ClientTemp client = new ClientTemp("192.168.11.2", Constant.PORT);
     /**
      * @see HttpServlet#HttpServlet()
      */
     public GetPhoto() {
-//		client.ACT001_writeMsg("0\n");
+		client.ACT001_writeMsg("0\n");
     }
 
 	/**
@@ -54,20 +55,38 @@ public class GetPhoto extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		
-/*		
-		client.ACT001_writeMsg("2#"+21+"#"+21+"#"+122+"#"+122+"\n");
-		while(client.getMsg().isEmpty()){
-			System.out.println("\\");
-		} 
-		if(client.getMsg().getFirst().equals("nothing found")){
-			System.out.println("nothing found");
-		}
-		else{
-			for(int i = 0; i< client.getMsg().size(); i++){
-		 System.out.println("ggggggggggggggggg"+client.getMsg().get(i).toString()+"gggggggggggggg");
+		try{
+			client.ACT001_writeMsg("2#"+21+"#"+21+"#"+122+"#"+122+"\n");
+			while(client.getMsg().isEmpty()){
+				System.out.println("\\");
+			} 
+			if(client.getMsg().get(0).equals("nothing found")){
+				System.out.println("nothing found");
 			}
-		}
-		*/
+			else{
+				for(int index = 0; index < client.getMsg().size(); index++){
+				JSONObject Result = new JSONObject();
+				String[] tempObject = client.getMsg().get(index).split("#");
+				Result.put("id", tempObject[0]);
+				Result.put("takendate", tempObject[1]);
+				Result.put("imgUrl", tempObject[2]);
+				Result.put("title", tempObject[3]);
+				Result.put("latitude", tempObject[4]);
+				Result.put("longitude", tempObject[5]);
+				ResultArray.add(Result);
+				}
+				response.setContentType("application/json");
+				PrintWriter pw = response.getWriter();  
+				pw.println(ResultArray);  
+		        pw.close();  
+			}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			finally{
+				client.clearLinkedList();
+				
+			}
 	}
 
 	/**
@@ -87,7 +106,7 @@ public class GetPhoto extends HttpServlet {
 		 longitude = URLDecoder.decode(request.getParameter("longitude"),"UTF-8");
 		 imgUrl = "http://farm"+farm+".staticflickr.com/"+server+"/"+id+"_"+secret+".jpg";
 
-	//	client.ACT001_writeMsg("1#"+latitude+"#"+longitude+"#"+latitude+"#"+longitude+"#"+id+"#"+takendate+"#"+imgUrl+"#"+title+"\n");
+		client.ACT001_writeMsg("1#"+latitude+"#"+longitude+"#"+latitude+"#"+longitude+"#"+id+"#"+takendate+"#"+imgUrl+"#"+title+"\n");
 		
 		System.out.println("id: "+id);
 		System.out.println("imgUrl: "+imgUrl);

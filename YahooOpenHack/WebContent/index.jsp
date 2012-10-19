@@ -191,7 +191,16 @@ javascript
 <script type="text/javascript">
 	var appid = "63d0f7b2e9592d8f5ad413cc5c60e551";
 	$('#addMarkerTest').click(function(){
-		$.get('getphoto.do',{},function(data){});
+		$.get('getphoto.do',{},function(Result){
+			for(var i=0; i < Result.length; i++){
+			addMarker(map,Result[i].latitude,Result[i].longitude,Result[i].imgUrl);
+			console.log('error');
+			console.log(Result[i].latitude);
+			console.log(Result[i].longitude);
+			console.log(Result[i].imgUrl);
+			
+			}
+		});
 	});
 		
 
@@ -226,11 +235,9 @@ javascript
 																										takendate : encodeURI(data.query.results.photo.dates.taken),
 																										latitude : encodeURI(data.query.results.photo.location.latitude),
 																										longitude : encodeURI(data.query.results.photo.location.longitude)
-																										
 																									},
 																									function(Result) {
-																										
-																										addMarker(map,Result.latitude,Result.longitude,Result.imgUrl);
+																									//	addMarker(map,Result.latitude,Result.longitude,Result.imgUrl);
 																									});
 																					
 																				});
