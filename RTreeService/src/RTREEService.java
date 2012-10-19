@@ -54,7 +54,7 @@ public class RTREEService extends Thread
 				Float.parseFloat(listSplit[3]), Float.parseFloat(listSplit[4]));
 		this.rTree.add(addRect, this.curAddTotalNode);
 		
-		this.hash.ACT001_add(Integer.toString(this.curAddTotalNode), listSplit[5], listSplit[6], listSplit[7], listSplit[8]);
+		this.hash.ACT001_add(Integer.toString(this.curAddTotalNode), listSplit[5], listSplit[6], listSplit[7], listSplit[8], Float.parseFloat(listSplit[1]), Float.parseFloat(listSplit[2]));
 		
 		this.curAddTotalNode = this.curAddTotalNode + 1;
 		System.out.println("Insert ok");
@@ -73,7 +73,7 @@ public class RTREEService extends Thread
 		List<Integer> ids = myProc.getIds();
 		msg =  this.hash.ACT002_get(ids);
 		System.out.println(msg);
-		this.ACT005_writeMsg(msg + "\n");
+		this.ACT005_writeMsg(msg);
 		System.out.println("Query ok");
 	}
 	public void ACT005_writeMsg(String msg)
