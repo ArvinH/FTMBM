@@ -41,7 +41,7 @@ public class GetPhoto extends HttpServlet {
 	String latitude = null;
 	String longitude = null;
 	String imgUrl = null;
-	ClientTemp client = new ClientTemp("192.168.11.2", Constant.PORT);
+	ClientTemp client = new ClientTemp("192.168.11.3", Constant.PORT);
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -110,15 +110,7 @@ public class GetPhoto extends HttpServlet {
 		
 		System.out.println("id: "+id);
 		System.out.println("imgUrl: "+imgUrl);
-		response.setContentType("application/json");
-		PrintWriter pw = response.getWriter();  
-		JSONObject Result = new JSONObject();
-		Result.put("id", id);
-		Result.put("latitude", latitude);
-		Result.put("longitude", longitude);
-		Result.put("imgUrl", imgUrl);
-		pw.println(Result);  
-        pw.close();  
+	 
 	}
 
 }
