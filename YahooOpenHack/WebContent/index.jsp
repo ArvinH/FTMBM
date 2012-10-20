@@ -114,7 +114,7 @@ function googlemapInitialize(){
 			    			  center: myLatlng,
 			    			  mapTypeId: google.maps.MapTypeId.ROADMAP
 			    			};
-			    			var map = new google.maps.Map(document.getElementById("map_canvas"),
+			    			 map = new google.maps.Map(document.getElementById("map_canvas"),
 			    				    myOptions);
 			    			addMarker(map,data.latitude, data.longitude,"http://farm9.staticflickr.com/8053/8086192864_256d21bdc5.jpg");
 			    }
