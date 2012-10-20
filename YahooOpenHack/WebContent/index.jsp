@@ -44,6 +44,7 @@ body {
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
 	type="text/javascript"></script>
+<script type="text/javascript" src="js/geolocation.js"></script>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
@@ -103,12 +104,13 @@ function addMarker(map,lat,lon,imgUrl){
 function googlemapInitialize(){
 	// 取得ip位置後，解析經緯度->show在map上  
 	$(function() {
-		if (<%=clientIP%> != 0){
-		$.getJSON('http://geoip.pidgets.com?ip='+<%=clientIP%>+'&format=json',
-				function(data) {  
-			    $('#msg').append("latitud: "+data.latitude+"</br>"+"longitude: "+data.longitude);
+		console.log(<%=clientIP%>);
+	//	if (<%=clientIP%> != 0){
+				GEO_LOCATION.getLocation(function(latitude,longitude) {  
+					console.log(datax+datay);
+			    $('#msg').append("latitud: "+latitude+"</br>"+"longitude: "+longitude);
 			    if(data.latitude != null){
-			    var myLatlng = new google.maps.LatLng(data.latitude, data.longitude);
+			    var myLatlng = new google.maps.LatLng(latitude, longitude);
 			    	var myOptions = {
 			    			  zoom: 18,
 			    			  center: myLatlng,
@@ -118,10 +120,11 @@ function googlemapInitialize(){
 			    				    myOptions);
 			    			addMarker(map,data.latitude, data.longitude,"http://farm9.staticflickr.com/8053/8086192864_256d21bdc5.jpg");
 			    }
+				},12000);
 			    	
-			});  
-		}
-		else {
+			 
+//		}
+	/*	else {
 			 var myLatlng = new google.maps.LatLng('25.0412', '121.5454');
 		    	var myOptions = {
 		    			  zoom: 18,
@@ -131,7 +134,7 @@ function googlemapInitialize(){
 		    			 map = new google.maps.Map(document.getElementById("map_canvas"),
 		    				    myOptions);
 		    			addMarker(map,'25.0412', '121.5454',"http://farm9.staticflickr.com/8053/8086192864_256d21bdc5.jpg");			 
-		}
+		} */
 		});
 	
 }
