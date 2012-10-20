@@ -1,142 +1,100 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>AWS-simple-tutorial</title>
-        
-        <!-- Google Webfonts and our stylesheet -->
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow|Open+Sans:300" />
-        <link rel="stylesheet" href="assets/css/styles.css" />
-        
-        <!--[if lt IE 9]>
-          <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]
-        -->
-        
-    </head>
+<!doctype html>
+
+<html lang="en">
+<head>
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+    <link href="assert/css/impress-demo.css" rel="stylesheet" />
     
-    <body>
-
-	<div id="impress" class="impress-not-supported">
-
-		<div id="intro" class="step" data-x="0" data-y="0">
-			<h2>Patisco <br>AWS simple tutorial</h2>
-			<img src="assets/img/aws.png" width="400" height="200"
-				alt="aws" />
-		</div>
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.js"></script>
+    		<%
+		 String pids = request.getParameter("PID");
+		System.out.println(pids);
+		 String[] PID = pids.split("-");
+	/* 	for(int i = 0; i< IMGURL.length-1;i++){
+			out.println("<li><a href=\"http://www.pikachoose.com\"><img src=\""+IMGURL[i]+"\"/></a><span></span></li>");
+		} */
 		
-		<div id="register_1" class="step" data-x="-300" data-y="600"
-			data-scale="0.2" data-rotate="270">
-			<h2>Register AWS</h2>
-			<img src="assets/img/register.png" width="700" height="458"
-				alt="register aws account" />
-		</div>
-		
-		<div id="register_2" class="step" data-x="1100" data-y="1200"
-			data-scale="1.8" data-rotate="190">
-			
-				<img id="img2" src="assets/img/image_2.png" width="450" height="350"
-				alt="fill the form" />
-				<img id="img1" src="assets/img/image_1.png" width="400" height="400"
-				alt="fill the form" />
-				
-		</div>
-		<div id="register_3" class="step" data-x="-200" data-y="1500"
-			data-rotate="180">
-			
-				<img id="img4" src="assets/img/image_4.png" width="450" height="350"
-				alt="fill the form" />
-				<img id="img5" src="assets/img/image_5.png" width="400" height="400"
-				alt="fill the form" />
-		</div>
+		%>
+</head>
 
-		<div id="console" class="step" data-x="-1200" data-y="1000"
-			data-scale="0.8" data-rotate="270">
-			<img src="assets/img/image_6.png" width="700" height="410"
-				alt="aws console" />
-		</div>
-		
-		<div id="slide6" class="step" data-x="-2000" data-y="2200"
-			data-scale="0.2" data-rotate="270">
-			<img src="assets/img/image_7-1.png" width="800" height="600"
-				alt="aws console" />
-		</div>
-		<div id="slide6-1" class="step" data-x="-800" data-y="2200"
-			data-scale="0.3" data-rotate="200">
-			<img src="assets/img/image_7.png" width="800" height="600"
-				alt="aws console" />
-		</div>
-		<div id="slide7" class="step" data-x="-5000" data-y="2200"
-			data-scale="1.8" data-rotate="190">
-			<img src="assets/img/image_8.png" width="800" height="600"
-				alt="aws console" />
-		</div>
-		
-		<div id="slide8" class="step" data-x="-300" data-y="2500"
-			data-scale="0.8" data-rotate="180">
-			<img src="assets/img/image_9.png" width="800" height="600"
-				alt="aws console" />
-		</div>
-		<div id="slide9" class="step" data-x="-3500" data-y="200"
-			data-scale="0.8" data-rotate="180">
-			<img src="assets/img/image_10.png" width="800" height="600"
-				alt="aws console" />
-		</div>
-		<div id="slide10" class="step" data-x="-3500" data-y="900"
-			data-scale="0.8" data-rotate="180">
-			<img src="assets/img/image_11.png" width="800" height="600"
-				alt="aws console" />
-		</div>
-		<div id="slide11" class="step" data-x="-4000" data-y="2100"
-			data-scale="0.8" data-rotate="180">
-			<img src="assets/img/image_12.png" width="800" height="600"
-				alt="aws console" />
-		</div>
-		<div id="slide12" class="step" data-x="-2500" data-y="900"
-			data-scale="0.8" data-rotate="180">
-			<img src="assets/img/image_13.png" width="800" height="600"
-				alt="aws console" />
-		</div>
-		<div id="slide13" class="step" data-x="-3500" data-y="3500"
-			data-scale="0.8" data-rotate="180">
-			<img src="assets/img/image_14.png" width="800" height="600"
-				alt="aws console" />
-		</div>
-		<div id="slide14" class="step" data-x="-5000" data-y="3500"
-			data-scale="0.8" data-rotate="180">
-			<img src="assets/img/image_15.png" width="800" height="600"
-				alt="aws console" />
-		</div>
-		<div id="slide15" class="step" data-x="-5000" data-y="250"
-			data-scale="0.8" data-rotate="180">
-			<img src="assets/img/image_16.png" width="800" height="600"
-				alt="aws console" />
-		</div>
-		<div id="slide16" class="step" data-x="-800" data-y="6000"
-			data-scale="0.8" data-rotate="180">
-			<img src="assets/img/image_17.png" width="800" height="600"
-				alt="aws console" />
-		</div>
-		<div id="slide17" class="step" data-x="-6000" data-y="250"
-			data-scale="0.3" data-rotate="180">
-			<img src="assets/img/image_18.png" width="800" height="600"
-				alt="aws console" />
-		</div>
-	</div>
+<script type="text/javascript">
+var appid = "63d0f7b2e9592d8f5ad413cc5c60e551";
+	var ids = "<%=pids%>";
+	var id = "";
+	if (ids.indexOf('-')){
+	id = ids.split("-");
+	}
+	else{
+		id = ids;
+		console.log(id);
+	}
+	var url = "";
+	var dataX = -2000;
+	for(var i = 0; i < id.length;i++){
+		 
+	 		$.getJSON('http://query.yahooapis.com/v1/public/yql?q=select id,title,farm,server,secret from flickr.photos.info where photo_id='
+					+ id[i]
+					+ ' and api_key=\"'
+					+ appid
+					+ '\"&format=json',{},function(data){
+						pid = data.query.results.photo.id;
+						pfarm = data.query.results.photo.farm;
+						pserver = data.query.results.photo.server;
+						psecret = data.query.results.photo.secret;
+						url = "http://farm"+pfarm+".staticflickr.com/"+pserver+"/"+pid+"_"+psecret+".jpg";
+					   // $('#impress').append(" <div class=\"step slide\" data-x=\""+dataX+"\" data-y=\"-900\"><img src=\""+url+"\"/><span></span></div>");
+					   // dataX+=1000;
+					   if(i<4){
+						   console.log(i);
+					   $('#'+i).append("<img src=\""+url+"\"/><span></span>");
+					   }
+					});  
+	 		
+	}
 
-	<a id="arrowLeft" class="arrow">&lt;</a>
-		<a id="arrowRight" class="arrow">&gt;</a>
 
-        <footer>
-	        <h2><i>Tutorial:</i> AWS-simple-tutorial   author: Arvin 2012/08/16</h2>
-           
-        </footer>
-        
-        <!-- JavaScript includes -->
-		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-		<script src="assets/js/impress.js"></script>
-		<script src="assets/js/script.js"></script>
 
-    </body>
+</script>
+
+<body class="impress-not-supported">
+
+
+
+<div id="impress" >
+
+    <div id="1" class="step slide" data-x="-1000" data-y="-1500">
+    </div>
+
+    <div id="2" class="step slide" data-x="0" data-y="-1500">
+       
+    </div>
+
+    <div id="3" class="step slide" data-x="1000" data-y="-1500">
+       
+    </div>
+
+   
+
+    <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+    </div>
+ 
+</div>
+
+
+<div class="hint">
+    <p>Use a spacebar or arrow keys to navigate</p>
+</div>
+</body>
+<script src="assert/js/impress.js"></script>
+<script>impress().init();</script>
+
+
+
+
 </html>
+
 

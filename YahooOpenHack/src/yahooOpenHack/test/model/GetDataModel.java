@@ -22,7 +22,7 @@ public class GetDataModel {
 	private String url = "jdbc:mysql://10.101.136.203/test?useUnicode=true&characterEncoding=UTF-8";
 	private String user = "root";
 	private String passwd = "YOH6";
-	private String selectSQL = "select * from image";
+	private String selectSQL = "select * from tpe101";
 	private JSONArray queryResult = new JSONArray();
 	private JSONObject tempResultObject = new JSONObject();
 	private JSONArray tempResultArray = new JSONArray();

@@ -97,7 +97,6 @@ function addMarkerWhenQuery(map,lat,lon,photoID){
 	  for(var i = 0; i< photoID.length; i++){
 		  if(i != photoID.length-1){
 		  PID += photoID[i].photoId+"-";
-		  console.log(PID);
 		  }
 		  else {
 			 PID += photoID[i].photoId;
@@ -201,7 +200,7 @@ function googlemapInitialize(){
 <div class="modal hide fade in" id="myModal"  style="display: none;" >
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
-    <h3>Modal Test</h3>
+    <h3 style="font-family: 'Arizonia', cursive; font-size: 64px">Photo</h3>
   </div>
   <div class="modal-iframe">
   <iframe class="modal-iframe" name="photoSlide" src="about:blank" frameborder="0"></iframe>
@@ -243,6 +242,8 @@ javascript
 					console.log(Result[i][j].longitude);
 					console.log(Result[i][j].imgURL); */
 				}
+				
+				
 				addMarkerWhenQuery(map,Result[i][0].latitude,Result[i][0].longitude,Result[i]);
 		/*		
 			addMarker(map,Result[i].latitude,Result[i].longitude,Result[i].imgUrl);
