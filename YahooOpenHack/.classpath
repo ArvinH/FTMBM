@@ -18,5 +18,6 @@
 	<classpathentry kind="lib" path="ext_lib/ezmorph-1.0.6.jar"/>
 	<classpathentry kind="lib" path="ext_lib/json-lib-2.4-jdk15.jar"/>
 	<classpathentry kind="lib" path="ext_lib/servlet-api-3.0.jar" sourcepath="C:/Users/Arvin/.m2/repository/org/mortbay/jetty/servlet-api/3.0.20100224/servlet-api-3.0.20100224-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/arvin/git/FTMBM/YahooOpenHack/ext_lib/mysql-connector-java-5.1.16-bin.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -195,18 +195,23 @@ javascript
 	var appid = "63d0f7b2e9592d8f5ad413cc5c60e551";
 	$('#addMarkerTest').click(function(){
 		$.get('getphoto.do',{},function(Result){
+			console.log(original_lat);
+			console.log(original_lon);
 			for(var i=0; i < Result.length; i++){
 				//處理雙層array
-				
-				$.get('http://maps.googleapis.com/maps/api/distancematrix/json?origins='+original_lat+', '+original_lat+'&destinations='+Result.i[j].latitude+', '+Result.i[j].longitude+'&sensor=false',{},
+				$.getJSON('http://maps.googleapis.com/maps/api/distancematrix/json?origins='+original_lat+','+original_lon+'&destinations='+Result[i][0].latitude+','+Result[i][0].longitude,{},
 							function(){
 						//計算好此Group的重心與使用者所在地點的距離
 					});
-				for(var j=0; j< Result.i.length; j++){
+				for(var j=0; j< Result[i].length; j++){
 					//處理每一筆Group的內容
+					console.log(Result[i][j].photoId);
+					console.log(Result[i][j].latitude);
+					console.log(Result[i][j].longitude);
+					console.log(Result[i][j].imgURL);
 					
-					//addMarker(map,Result.i[j].latitude,Result.i[j].longitude,Result.i[j].imgUrl);
 				}
+				//addMarker(map,Result.i[j].latitude,Result.i[j].longitude,Result.i[j].imgUrl);
 		/*		
 			addMarker(map,Result[i].latitude,Result[i].longitude,Result[i].imgUrl);
 			console.log('error');

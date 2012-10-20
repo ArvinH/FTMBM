@@ -18,6 +18,8 @@ public class ClientTemp extends Thread {
 	private LinkedList<String> tempString = new LinkedList<String>();
 	private LinkedList<String> linkedListInside = new LinkedList<String>();
 	private LinkedList<LinkedList> linkedListOutside = new LinkedList<LinkedList>();
+	
+	private int tempStringSize = 0;
 	public ClientTemp(String addr, int port)
 	{
 		this.clientSocket = new Socket();
@@ -39,8 +41,10 @@ public class ClientTemp extends Thread {
 	        		tempString.add(strMessage);
 	        	}
 //	        	while((strMessage = reader.readLine()) != null)
-	 //       	{
-	        	for(int i=0; i < tempString.size(); i++){
+	        	tempStringSize = tempString.size();
+	        	while(tempStringSize!=0)
+	        	{
+//	        	for(int i=0; i < tempString.size(); i++){
 	        	
 	        		tempNo = strMessage.split("#")[0];
 	        		if(!GroupNo.equals(tempNo)){
@@ -55,9 +59,11 @@ public class ClientTemp extends Thread {
 	        			linkedListInside.add(strMessage);
 	        			System.out.println(strMessage);
 	        		}
-	        		if(i == (tempString.size() - 1)){
-	        			finish = true;
-	        		}
+	        		tempStringSize-=1;
+	        		
+//	        		if(i == (tempString.size() - 1)){
+//	        			finish = true;
+//	        		}
 	        	}
 	  //      	}
 	        

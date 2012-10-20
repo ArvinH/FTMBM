@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import yahooOpenHack.test.model.ClientTemp;
 import yahooOpenHack.test.model.Constant;
+import yahooOpenHack.test.model.GetDataModel;
 import yahooOpenHack.test.model.GetJSONResult;
 import yahooOpenHack.test.model.SendAPIQuery;
 
@@ -55,7 +56,36 @@ public class GetPhoto extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
+		GetDataModel dataModel = new GetDataModel();
+		JSONArray finalResult = dataModel.SelectTable();
+		response.setContentType("application/json");
+		PrintWriter pw = response.getWriter();  
+		pw.println(finalResult);  
+        pw.close();  
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.setCharacterEncoding("UTF-8");
+		/*
+		 id = URLDecoder.decode(request.getParameter("id"),"UTF-8");
+		 title = URLDecoder.decode(request.getParameter("title"),"UTF-8");
+		 farm = URLDecoder.decode(request.getParameter("farm"),"UTF-8");
+		 server = URLDecoder.decode(request.getParameter("server"),"UTF-8");
+		 secret = URLDecoder.decode(request.getParameter("secret"),"UTF-8");
+		 takendate = URLDecoder.decode(request.getParameter("takendate"),"UTF-8");
+		 latitude = URLDecoder.decode(request.getParameter("latitude"),"UTF-8");
+		 longitude = URLDecoder.decode(request.getParameter("longitude"),"UTF-8");
+		 imgUrl = "http://farm"+farm+".staticflickr.com/"+server+"/"+id+"_"+secret+".jpg";
 		
+		 
+		client.ACT001_writeMsg("1#"+latitude+"#"+longitude+"#"+latitude+"#"+longitude+"#"+id+"#"+takendate+"#"+imgUrl+"#"+title+"\n");
+		
+		*/
+
 		try{
 			client.ACT001_writeMsg("4\n");
 			while(!client.isFinish()){
@@ -91,30 +121,6 @@ public class GetPhoto extends HttpServlet {
 				client.clearLinkedList();
 				
 			}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.setCharacterEncoding("UTF-8");
-		
-		 id = URLDecoder.decode(request.getParameter("id"),"UTF-8");
-		 title = URLDecoder.decode(request.getParameter("title"),"UTF-8");
-		 farm = URLDecoder.decode(request.getParameter("farm"),"UTF-8");
-		 server = URLDecoder.decode(request.getParameter("server"),"UTF-8");
-		 secret = URLDecoder.decode(request.getParameter("secret"),"UTF-8");
-		 takendate = URLDecoder.decode(request.getParameter("takendate"),"UTF-8");
-		 latitude = URLDecoder.decode(request.getParameter("latitude"),"UTF-8");
-		 longitude = URLDecoder.decode(request.getParameter("longitude"),"UTF-8");
-		 imgUrl = "http://farm"+farm+".staticflickr.com/"+server+"/"+id+"_"+secret+".jpg";
-		
-		 
-		client.ACT001_writeMsg("1#"+latitude+"#"+longitude+"#"+latitude+"#"+longitude+"#"+id+"#"+takendate+"#"+imgUrl+"#"+title+"\n");
-		
-		
-	 
 	}
 
 }
