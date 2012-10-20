@@ -239,7 +239,7 @@ javascript
 																						+ '\"&format=json',
 																				function(data) {
 																					console.log(data.query.results.photo.id+" "+data.query.results.photo.dates.taken+" "+data.query.results.photo.location.latitude+" "+data.query.results.photo.location.longitude);
-																					$.post('insertphotoinfo.do',
+																					$.get('insertphotoinfo.do',
 																									{
 																										id : encodeURI(data.query.results.photo.id),
 																										title : encodeURI(data.query.results.photo.title),
