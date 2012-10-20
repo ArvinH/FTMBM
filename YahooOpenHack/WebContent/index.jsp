@@ -113,7 +113,7 @@ function googlemapInitialize(){
 			    original_lon = longitude;
 			    var myLatlng = new google.maps.LatLng(latitude, longitude);
 			    	var myOptions = {
-			    			  zoom: 14,
+			    			  zoom: 13,
 			    			  center: myLatlng,
 			    			  mapTypeId: google.maps.MapTypeId.ROADMAP
 			    			};
@@ -209,9 +209,8 @@ javascript
 					console.log(Result[i][j].latitude);
 					console.log(Result[i][j].longitude);
 					console.log(Result[i][j].imgURL);
-					
 				}
-				//addMarker(map,Result.i[j].latitude,Result.i[j].longitude,Result.i[j].imgUrl);
+				addMarker(map,Result[i][0].latitude,Result[i][0].longitude,Result[i][0].imgURL);
 		/*		
 			addMarker(map,Result[i].latitude,Result[i].longitude,Result[i].imgUrl);
 			console.log('error');
