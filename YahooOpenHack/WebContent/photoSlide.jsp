@@ -40,7 +40,6 @@ body {
 <div class="pikachoose">
 	<ul id="pikame" class="jcarousel-skin-pika">
 		
-		
 	</ul>
 </div>
 </body>
@@ -51,21 +50,23 @@ var appid = "63d0f7b2e9592d8f5ad413cc5c60e551";
 	var id = ids.split("-");
 	console.log(id);
 	var url = "";
-	for(var i = 0; id.length;i++){
-		
-	/* 		$.getJSON('http://query.yahooapis.com/v1/public/yql?q=select title,farm,server,secret from flickr.photos.info where photo_id='
+	for(var i = 0; i < id.length;i++){
+		 
+	 		$.getJSON('http://query.yahooapis.com/v1/public/yql?q=select id,title,farm,server,secret from flickr.photos.info where photo_id='
 					+ id[i]
 					+ ' and api_key=\"'
 					+ appid
-					+ '\"&format=json',{},function(Result){
+					+ '\"&format=json',{},function(data){
 						pid = data.query.results.photo.id;
 						pfarm = data.query.results.photo.farm;
 						pserver = data.query.results.photo.server;
 						psecret = data.query.results.photo.secret;
 						url = "http://farm"+pfarm+".staticflickr.com/"+pserver+"/"+pid+"_"+psecret+".jpg";
-					//	$('#pikame').append("<li><a href=\"http://www.pikachoose.com\"><img src=\""+url+"\"/></a><span></span></li>");
-					}); */
+						console.log(url);
+						$('.pikachoose ul').append("<li><img src=\""+url+"\"/><span></span></li>");
+					});  
 	}
 
 </script>
+
 </html>
