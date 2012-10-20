@@ -111,7 +111,7 @@ function googlemapInitialize(){
 			    
 			    var myLatlng = new google.maps.LatLng(latitude, longitude);
 			    	var myOptions = {
-			    			  zoom: 18,
+			    			  zoom: 14,
 			    			  center: myLatlng,
 			    			  mapTypeId: google.maps.MapTypeId.ROADMAP
 			    			};
@@ -155,8 +155,8 @@ function googlemapInitialize(){
 		<div class="navbar-form">
 			<input type="text" class="span9"
 				placeholder="place, view, people or anything you want to see">
-			<button id="submit" type="submit" class="btn btn-success">Submit</button>
-			<button id="addMarkerTest" type="button" value="addMarker" class="btn">addMaker</button>
+			<button id="addMarkerTest" type="button" class="btn btn-success" value="addMarker" class="btn">Enter</button>
+			<button id="GetInfo" type="submit" class="btn btn-success">GetInfo</button>
 		</div>
 	</div>
 
@@ -200,16 +200,16 @@ javascript
 			console.log(Result[i].latitude);
 			console.log(Result[i].longitude);
 			console.log(Result[i].imgUrl);
-			
 			}
 		});
 	});
 		
 
 	
-	$('#submit')
+	$('#GetInfo')
 			.click(
 					function() {
+						$('#GetInfo').display="none";
 						var i = 0;
 						$
 								.getJSON(
