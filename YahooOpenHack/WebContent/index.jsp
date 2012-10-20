@@ -197,6 +197,7 @@ javascript
 		$.get('getphoto.do',{},function(Result){
 			for(var i=0; i < Result.length; i++){
 				//處理雙層array
+				
 				$.get('http://maps.googleapis.com/maps/api/distancematrix/json?origins='+original_lat+', '+original_lat+'&destinations='+Result.i[j].latitude+', '+Result.i[j].longitude+'&sensor=false',{},
 							function(){
 						//計算好此Group的重心與使用者所在地點的距離
@@ -204,7 +205,7 @@ javascript
 				for(var j=0; j< Result.i.length; j++){
 					//處理每一筆Group的內容
 					
-					addMarker(map,Result.i[j].latitude,Result.i[j].longitude,Result.i[j].imgUrl);
+					//addMarker(map,Result.i[j].latitude,Result.i[j].longitude,Result.i[j].imgUrl);
 				}
 		/*		
 			addMarker(map,Result[i].latitude,Result[i].longitude,Result[i].imgUrl);
@@ -252,6 +253,10 @@ javascript
 																									},
 																									function(Result) {
 																									//	addMarker(map,Result.latitude,Result.longitude,Result.imgUrl);
+																									$.post('insertphotoinfo.do',{},function(data){
+																										// sent role 3 to R-tree service
+																									});
+																								
 																									});
 																					
 																				});
@@ -261,6 +266,7 @@ javascript
 										});
 
 					});
+
 
 /*
 $('#GetInfo')

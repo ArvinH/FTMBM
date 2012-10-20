@@ -42,12 +42,12 @@ public class GetPhoto extends HttpServlet {
 	String latitude = null;
 	String longitude = null;
 	String imgUrl = null;
-	ClientTemp client = new ClientTemp("10.101.136.32", 9999);
+	ClientTemp client = new ClientTemp("10.101.136.203", 9999);
     /**
      * @see HttpServlet#HttpServlet()
      */
     public GetPhoto() {
-		client.ACT001_writeMsg("0\n");
+		//client.ACT001_writeMsg("0\n");
     }
 
 	/**
@@ -57,9 +57,9 @@ public class GetPhoto extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		
 		try{
-			client.ACT001_writeMsg("2#"+21+"#"+21+"#"+122+"#"+122+"\n");
-			while(client.getMsg().isEmpty()){
-				System.out.println("\\");
+			client.ACT001_writeMsg("4\n");
+			while(!client.isFinish()){
+				//System.out.println("\\");
 			} 
 			if(client.getMsg().get(0).equals("nothing found")){
 				System.out.println("nothing found");
@@ -109,6 +109,7 @@ public class GetPhoto extends HttpServlet {
 		 latitude = URLDecoder.decode(request.getParameter("latitude"),"UTF-8");
 		 longitude = URLDecoder.decode(request.getParameter("longitude"),"UTF-8");
 		 imgUrl = "http://farm"+farm+".staticflickr.com/"+server+"/"+id+"_"+secret+".jpg";
+		
 		 
 		client.ACT001_writeMsg("1#"+latitude+"#"+longitude+"#"+latitude+"#"+longitude+"#"+id+"#"+takendate+"#"+imgUrl+"#"+title+"\n");
 		

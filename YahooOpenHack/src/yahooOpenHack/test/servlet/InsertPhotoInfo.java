@@ -30,7 +30,7 @@ public class InsertPhotoInfo extends HttpServlet {
 	String latitude = null;
 	String longitude = null;
 	String imgUrl = null;
-	ClientTemp client = new ClientTemp("10.101.136.32", 9999);
+	ClientTemp client = new ClientTemp("10.101.136.203", 9999);
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -67,7 +67,7 @@ public class InsertPhotoInfo extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		client.ACT001_writeMsg("3\n");
 	}
 
 }
