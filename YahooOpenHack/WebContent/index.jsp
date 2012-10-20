@@ -226,7 +226,7 @@ javascript
 								.getJSON(
 										'http://query.yahooapis.com/v1/public/yql?q=select * from flickr.photos.search(0) where text=\"sunrise\" and has_geo=1 and lat=22.993299484253 and lon=120.20359802246 and content_type=1 and api_key=\"'
 												+ appid
-												+ '\" and radius=20 limit 5&format=json',
+												+ '\" and radius=20 limit 20&format=json',
 										function(data) {
 											$.each(
 													data.query.results.photo,
@@ -262,6 +262,33 @@ javascript
 
 					});
 
+/*
+$('#GetInfo')
+.click(
+		function() {
+			$('#GetInfo').hide();
+$.getJSON(
+		'http://query.yahooapis.com/v1/public/yql?q=select id,title,dates.taken,farm,server,id,secret,location.longitude,location.latitude from flickr.photos.info where photo_id in (select id from flickr.photos.search(0) where text=\"sunrise\" and has_geo=1 and lat=22.993299484253 and lon=120.20359802246 and content_type=1 and api_key=\"63d0f7b2e9592d8f5ad413cc5c60e551\" and radius=20 limit=5) and api_key=\"63d0f7b2e9592d8f5ad413cc5c60e551\"&format=json',
+				function(data) {
+					console.log(data.query.results.photo.id+" "+data.query.results.photo.dates.taken+" "+data.query.results.photo.location.latitude+" "+data.query.results.photo.location.longitude);
+					$.get('insertphotoinfo.do',
+									{
+										id : encodeURI(data.query.results.photo.id),
+										title : encodeURI(data.query.results.photo.title),
+										farm : encodeURI(data.query.results.photo.farm),
+										server : encodeURI(data.query.results.photo.server),
+										secret : encodeURI(data.query.results.photo.secret),
+										takendate : encodeURI(data.query.results.photo.dates.taken),
+										latitude : encodeURI(data.query.results.photo.location.latitude),
+										longitude : encodeURI(data.query.results.photo.location.longitude)
+									},
+									function(Result) {
+									//	addMarker(map,Result.latitude,Result.longitude,Result.imgUrl);
+									});
+					
+				});
 
+});
+*/
 </script>
 </html>
