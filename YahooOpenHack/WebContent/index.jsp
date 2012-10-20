@@ -81,7 +81,7 @@ body {
 var map;
 var original_lat;
 var original_lon;
-function addMarker(map,lat,lon,imgUrl){
+function addMarkerWhenQuery(map,lat,lon,imgUrl,distance){
 	var myLatlng = new google.maps.LatLng(lat, lon);	
 	var image = 'img/location.png';
 	  
@@ -95,7 +95,28 @@ function addMarker(map,lat,lon,imgUrl){
 
 	  google.maps.event.addListener(Marker, "click", function() { 
 		 
-			  window.frames["photoSlide"].location.href="photoSlide.jsp?imgUrl="+imgUrl;
+			  window.frames["photoSlide"].location.href="photoSlide.jsp?imgUrl="+imgUrl+"&distance="+distance;
+			  $('#myModal').modal('show');
+			  
+      });
+	  
+	  
+}
+function addMarker(map,lat,lon,imgUrl,distance){
+	var myLatlng = new google.maps.LatLng(lat, lon);	
+	var image = 'img/location.png';
+	  
+	  var Marker = new google.maps.Marker({
+		  animation: google.maps.Animation.DROP,
+	      position: myLatlng,
+	      icon: image
+	  });
+	  map.setCenter(myLatlng);
+	  Marker.setMap(map);
+
+	  google.maps.event.addListener(Marker, "click", function() { 
+		 
+			  window.frames["photoSlide"].location.href="photoSlide.jsp?imgUrl="+imgUrl+"&distance="+distance;
 			  $('#myModal').modal('show');
 			  
       });
@@ -113,7 +134,7 @@ function googlemapInitialize(){
 			    original_lon = longitude;
 			    var myLatlng = new google.maps.LatLng(latitude, longitude);
 			    	var myOptions = {
-			    			  zoom: 13,
+			    			  zoom: 12,
 			    			  center: myLatlng,
 			    			  mapTypeId: google.maps.MapTypeId.ROADMAP
 			    			};
@@ -197,10 +218,12 @@ javascript
 		$.get('getphoto.do',{},function(Result){
 			console.log(original_lat);
 			console.log(original_lon);
+			var distance = 0;
 			for(var i=0; i < Result.length; i++){
 				//處理雙層array
 				$.getJSON('http://maps.googleapis.com/maps/api/distancematrix/json?origins='+original_lat+','+original_lon+'&destinations='+Result[i][0].latitude+','+Result[i][0].longitude,{},
-							function(){
+							function(Result){
+					distance = Result;
 						//計算好此Group的重心與使用者所在地點的距離
 					});
 				for(var j=0; j< Result[i].length; j++){
@@ -210,7 +233,7 @@ javascript
 					console.log(Result[i][j].longitude);
 					console.log(Result[i][j].imgURL);
 				}
-				addMarker(map,Result[i][0].latitude,Result[i][0].longitude,Result[i][0].imgURL);
+				addMarkerWhenQuery(map,Result[i][0].latitude,Result[i][0].longitude,Result[i],distance);
 		/*		
 			addMarker(map,Result[i].latitude,Result[i].longitude,Result[i].imgUrl);
 			console.log('error');

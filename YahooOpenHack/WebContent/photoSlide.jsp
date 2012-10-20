@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import='net.sf.json.JSONObject' %>
+<%@ page import='net.sf.json.JSONArray' %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -17,8 +19,8 @@ body {
         <script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
 		<script type="text/javascript" src="js/jquery.pikachoose.js"></script>
 		<%
-			 String imgUrl = request.getParameter("imgUrl");
-			 System.out.print(imgUrl);
+			 JSONArray imgURL = JSONArray.fromObject(request.getParameter("imgURL"));
+			 String distance = request.getParameter("distance");
 		%>
 		<script language="javascript">
 			$(document).ready(
@@ -32,11 +34,14 @@ body {
 <!-- not really needed, i'm using it to center the gallery. -->
 <div class="pikachoose">
 	<ul id="pikame" class="jcarousel-skin-pika">
-		<li><a href="http://www.pikachoose.com"><img src="<%=imgUrl%>"/></a><span>This is an example of the basic theme.</span></li>
-		<li><a href="http://www.pikachoose.com"><img src="img/2.jpg"/></a><span>jCarousel is supported and can be integrated with PikaChoose!</span></li>
-		<li><a href="http://www.pikachoose.com"><img src="img/3.jpg"/></a><span>Be sure to check out <a href="http://www.pikachoose.com">PikaChoose.com</a> for updates.</span></li>
-		<li><a href="http://www.pikachoose.com"><img src="img/4.jpg"/></a><span>You can use any type of html you want with PikaChoose</span></li>
-		<li><a href="http://www.pikachoose.com"><img src="img/5.jpg"/></a><span>PikaChoose survives on your donations! Keep the project alive with a donation.</span></li>
+		<%
+		for(int i = 0; i< imgURL.size();i++){
+			out.println("<li><a href=\"http://www.pikachoose.com\"><img src=\""+imgURL.getJSONObject(i).get("imgURL")+"\"/></a><span>distance:"+distance+"</span></li>");
+		}
+		
+		%>
+		
+		
 	</ul>
 </div>
 

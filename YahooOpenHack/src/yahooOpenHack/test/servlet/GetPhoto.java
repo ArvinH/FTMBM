@@ -43,7 +43,7 @@ public class GetPhoto extends HttpServlet {
 	String latitude = null;
 	String longitude = null;
 	String imgUrl = null;
-	ClientTemp client = new ClientTemp("10.101.136.203", 9999);
+	ClientTemp client = new ClientTemp("10.101.136.32", 9999);
     /**
      * @see HttpServlet#HttpServlet()
      */

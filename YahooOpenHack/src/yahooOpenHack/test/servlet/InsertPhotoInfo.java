@@ -19,8 +19,6 @@ import yahooOpenHack.test.model.ClientTemp;
 @WebServlet("/InsertPhotoInfo")
 public class InsertPhotoInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private JSONObject finalResult = new JSONObject();
-	private JSONArray tempArray = new JSONArray();
 	String id = null;
 	String title = null;
 	String farm = null;
@@ -30,7 +28,7 @@ public class InsertPhotoInfo extends HttpServlet {
 	String latitude = null;
 	String longitude = null;
 	String imgUrl = null;
-	ClientTemp client = new ClientTemp("10.101.136.203", 9999);
+	ClientTemp client = new ClientTemp("10.101.136.32", 9999);
     /**
      * @see HttpServlet#HttpServlet()
      */
