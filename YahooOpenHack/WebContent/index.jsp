@@ -104,12 +104,11 @@ function addMarker(map,lat,lon,imgUrl){
 function googlemapInitialize(){
 	// 取得ip位置後，解析經緯度->show在map上  
 	$(function() {
-		console.log(<%=clientIP%>);
-	//	if (<%=clientIP%> != 0){
+	
 				GEO_LOCATION.getLocation(function(latitude,longitude) {  
-					console.log(datax+datay);
+					console.log(latitude+longitude);
 			    $('#msg').append("latitud: "+latitude+"</br>"+"longitude: "+longitude);
-			    if(data.latitude != null){
+			    
 			    var myLatlng = new google.maps.LatLng(latitude, longitude);
 			    	var myOptions = {
 			    			  zoom: 18,
@@ -118,8 +117,8 @@ function googlemapInitialize(){
 			    			};
 			    			 map = new google.maps.Map(document.getElementById("map_canvas"),
 			    				    myOptions);
-			    			addMarker(map,data.latitude, data.longitude,"http://farm9.staticflickr.com/8053/8086192864_256d21bdc5.jpg");
-			    }
+			    			addMarker(map,latitude, longitude,"http://farm9.staticflickr.com/8053/8086192864_256d21bdc5.jpg");
+			    
 				},12000);
 			    	
 			 
