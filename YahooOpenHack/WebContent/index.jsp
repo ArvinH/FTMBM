@@ -79,7 +79,8 @@ body {
 <script type="text/javascript">
 
 var map;
-
+var original_lat;
+var original_lon;
 function addMarker(map,lat,lon,imgUrl){
 	var myLatlng = new google.maps.LatLng(lat, lon);	
 	var image = 'img/location.png';
@@ -108,7 +109,8 @@ function googlemapInitialize(){
 				GEO_LOCATION.getLocation(function(latitude,longitude) {  
 					console.log(latitude+longitude);
 			    $('#msg').append("latitud: "+latitude+"</br>"+"longitude: "+longitude);
-			    
+			    original_lat = latitude;
+			    original_lon = longitude;
 			    var myLatlng = new google.maps.LatLng(latitude, longitude);
 			    	var myOptions = {
 			    			  zoom: 14,
@@ -195,11 +197,21 @@ javascript
 		$.get('getphoto.do',{},function(Result){
 			for(var i=0; i < Result.length; i++){
 				//處理雙層array
+				for(var j=0; j< Result.i.length; j++){
+					//處理每一筆Group的內容
+					$.get('http://maps.googleapis.com/maps/api/distancematrix/json?origins='+original_lat+', '+original_lat+'&destinations='+Result.i[j].latitude+', '+Result.i[j].longitude+'&sensor=false',{},
+							function(){
+						//計算好此Group的重心與使用者所在地點的距離
+					});
+					addMarker(map,Result.i[j].latitude,Result.i[j].longitude,Result.i[j].imgUrl);
+				}
+		/*		
 			addMarker(map,Result[i].latitude,Result[i].longitude,Result[i].imgUrl);
 			console.log('error');
 			console.log(Result[i].latitude);
 			console.log(Result[i].longitude);
 			console.log(Result[i].imgUrl);
+		*/
 			}
 		});
 	});

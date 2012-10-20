@@ -31,7 +31,7 @@ import net.sf.json.JSONObject;
 @WebServlet("/GetIP_Location")
 public class GetPhoto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private JSONArray ResultArray = new JSONArray();
+	private JSONObject finalResult = new JSONObject();
 	private JSONArray tempArray = new JSONArray();
 	String id = null;
 	String title = null;
@@ -77,11 +77,11 @@ public class GetPhoto extends HttpServlet {
 				Result.put("longitude", tempObject[5]);
 				tempArray.add(Result);
 					}
-					ResultArray.add(tempArray);
+					finalResult.put(index,tempArray);
 				}
 				response.setContentType("application/json");
 				PrintWriter pw = response.getWriter();  
-				pw.println(ResultArray);  
+				pw.println(finalResult);  
 		        pw.close();  
 			}
 			}catch(Exception e){
