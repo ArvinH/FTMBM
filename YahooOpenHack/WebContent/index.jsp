@@ -84,7 +84,7 @@ var original_lon;
 function addMarkerWhenQuery(map,lat,lon,imgUrl,distance){
 	var myLatlng = new google.maps.LatLng(lat, lon);	
 	var image = 'img/location.png';
-	  
+	var imgURL = "";
 	  var Marker = new google.maps.Marker({
 		  animation: google.maps.Animation.DROP,
 	      position: myLatlng,
@@ -94,8 +94,10 @@ function addMarkerWhenQuery(map,lat,lon,imgUrl,distance){
 	  Marker.setMap(map);
 
 	  google.maps.event.addListener(Marker, "click", function() { 
-		 
-			  window.frames["photoSlide"].location.href="photoSlide.jsp?imgUrl="+imgUrl+"&distance="+distance;
+	  for(var i = 0; imgUrl[i].length; i++){
+		  imgURL += imgUrl[i].imgURL+"#";
+	  }
+			  window.frames["photoSlide"].location.href="photoSlide.jsp?imgUrl="+imgURL+"&distance="+distance;
 			  $('#myModal').modal('show');
 			  
       });
@@ -105,7 +107,7 @@ function addMarkerWhenQuery(map,lat,lon,imgUrl,distance){
 function addMarker(map,lat,lon,imgUrl,distance){
 	var myLatlng = new google.maps.LatLng(lat, lon);	
 	var image = 'img/location.png';
-	  
+	 var imgURL;
 	  var Marker = new google.maps.Marker({
 		  animation: google.maps.Animation.DROP,
 	      position: myLatlng,
@@ -113,10 +115,10 @@ function addMarker(map,lat,lon,imgUrl,distance){
 	  });
 	  map.setCenter(myLatlng);
 	  Marker.setMap(map);
-
+	
 	  google.maps.event.addListener(Marker, "click", function() { 
 		 
-			  window.frames["photoSlide"].location.href="photoSlide.jsp?imgUrl="+imgUrl+"&distance="+distance;
+			  window.frames["photoSlide"].location.href="photoSlide.jsp?imgUrl="+imgUrl;
 			  $('#myModal').modal('show');
 			  
       });

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import='net.sf.json.JSONObject' %>
-<%@ page import='net.sf.json.JSONArray' %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -19,7 +18,8 @@ body {
         <script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
 		<script type="text/javascript" src="js/jquery.pikachoose.js"></script>
 		<%
-			 JSONArray imgURL = JSONArray.fromObject(request.getParameter("imgURL"));
+			 String imgURL = request.getParameter("imgURL");
+			 String[] IMGURL = imgURL.split("#");
 			 String distance = request.getParameter("distance");
 		%>
 		<script language="javascript">
@@ -35,8 +35,8 @@ body {
 <div class="pikachoose">
 	<ul id="pikame" class="jcarousel-skin-pika">
 		<%
-		for(int i = 0; i< imgURL.size();i++){
-			out.println("<li><a href=\"http://www.pikachoose.com\"><img src=\""+imgURL.getJSONObject(i).get("imgURL")+"\"/></a><span>distance:"+distance+"</span></li>");
+		for(int i = 0; i< IMGURL.length-1;i++){
+			out.println("<li><a href=\"http://www.pikachoose.com\"><img src=\""+IMGURL[i]+"\"/></a><span>distance:"+distance+"</span></li>");
 		}
 		
 		%>

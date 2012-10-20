@@ -43,7 +43,7 @@ public class GetPhoto extends HttpServlet {
 	String latitude = null;
 	String longitude = null;
 	String imgUrl = null;
-	ClientTemp client = new ClientTemp("10.101.136.32", 9999);
+	//ClientTemp client = new ClientTemp("10.101.136.32", 9999);
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -84,7 +84,7 @@ public class GetPhoto extends HttpServlet {
 		 
 		client.ACT001_writeMsg("1#"+latitude+"#"+longitude+"#"+latitude+"#"+longitude+"#"+id+"#"+takendate+"#"+imgUrl+"#"+title+"\n");
 		
-		*/
+		
 
 		try{
 			client.ACT001_writeMsg("4\n");
@@ -121,6 +121,8 @@ public class GetPhoto extends HttpServlet {
 				client.clearLinkedList();
 				
 			}
+			*/
 	}
+	
 
 }
