@@ -12,7 +12,10 @@ public class ClientTemp extends Thread {
 
 	private Socket clientSocket = null;
 	private String strMessage = null;
-	private LinkedList<String> linkedList = new LinkedList<String>();
+	private String tempNo = null;
+	private String GroupNo = "0";
+	private LinkedList<String> linkedListInside = new LinkedList<String>();
+	private LinkedList<LinkedList> linkedListOutside = new LinkedList<LinkedList>();
 	private int count = 0;
 	public ClientTemp(String addr, int port)
 	{
@@ -22,7 +25,7 @@ public class ClientTemp extends Thread {
         	this.clientSocket.connect(isa, 10000);
             this.start();
         } catch (java.io.IOException e) {
-            System.out.println("Socket連線有問題 !");
+            System.out.println("Socket connection error !");
             System.out.println("IOException :" + e.toString());
         }
 	}
@@ -33,8 +36,18 @@ public class ClientTemp extends Thread {
 	        	DataInputStream reader = new DataInputStream(this.clientSocket.getInputStream());
 	        	while((strMessage = reader.readLine()) != null)
 	        	{
-	        		linkedList.add(strMessage);
-		        	System.out.println(strMessage);
+	        		tempNo = strMessage.split("#")[0];
+	        		if(!GroupNo.equals(tempNo)){
+	        			GroupNo = tempNo;
+	        			//add 
+	        			linkedListOutside.add(linkedListInside);
+	        			linkedListInside = new LinkedList<String>();
+	        			
+	        		}
+	        		else{
+	        			linkedListInside.add(strMessage);
+	        			System.out.println(strMessage);
+	        		}
 	        	}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -42,12 +55,12 @@ public class ClientTemp extends Thread {
 			}
         }
     }
-	public LinkedList<String> getMsg(){
+	public LinkedList<LinkedList> getMsg(){
 		
-		return linkedList;
+		return linkedListOutside;
 	}
 	public void clearLinkedList(){
-		linkedList.clear();
+		linkedListOutside.clear();
 		count = 0;
 	}
 	public void ACT001_writeMsg(String msg)

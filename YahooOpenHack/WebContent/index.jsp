@@ -118,7 +118,6 @@ function googlemapInitialize(){
 			    			 map = new google.maps.Map(document.getElementById("map_canvas"),
 			    				    myOptions);
 			    			addMarker(map,latitude, longitude,"http://farm9.staticflickr.com/8053/8086192864_256d21bdc5.jpg");
-			    
 				},12000);
 			    	
 			 
@@ -195,6 +194,7 @@ javascript
 	$('#addMarkerTest').click(function(){
 		$.get('getphoto.do',{},function(Result){
 			for(var i=0; i < Result.length; i++){
+				//處理雙層array
 			addMarker(map,Result[i].latitude,Result[i].longitude,Result[i].imgUrl);
 			console.log('error');
 			console.log(Result[i].latitude);
@@ -203,9 +203,7 @@ javascript
 			}
 		});
 	});
-		
 
-	
 	$('#GetInfo')
 			.click(
 					function() {

@@ -32,6 +32,7 @@ import net.sf.json.JSONObject;
 public class GetPhoto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private JSONArray ResultArray = new JSONArray();
+	private JSONArray tempArray = new JSONArray();
 	String id = null;
 	String title = null;
 	String farm = null;
@@ -65,15 +66,18 @@ public class GetPhoto extends HttpServlet {
 			}
 			else{
 				for(int index = 0; index < client.getMsg().size(); index++){
+					for(int index2 = 0; index2 < client.getMsg().get(index).size();index2++){
 				JSONObject Result = new JSONObject();
-				String[] tempObject = client.getMsg().get(index).split("#");
+				String[] tempObject = ((String)client.getMsg().get(index).get(index2)).split("#");
 				Result.put("id", tempObject[0]);
 				Result.put("takendate", tempObject[1]);
 				Result.put("imgUrl", tempObject[2]);
 				Result.put("title", tempObject[3]);
 				Result.put("latitude", tempObject[4]);
 				Result.put("longitude", tempObject[5]);
-				ResultArray.add(Result);
+				tempArray.add(Result);
+					}
+					ResultArray.add(tempArray);
 				}
 				response.setContentType("application/json");
 				PrintWriter pw = response.getWriter();  
