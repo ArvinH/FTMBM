@@ -17,11 +17,6 @@ body {
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.js"></script>
         <script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
 		<script type="text/javascript" src="js/jquery.pikachoose.js"></script>
-		<%
-			 String imgURL = request.getParameter("imgURL");
-			 String[] IMGURL = imgURL.split("#");
-			 String distance = request.getParameter("distance");
-		%>
 		<script language="javascript">
 			$(document).ready(
 				function (){
@@ -35,6 +30,10 @@ body {
 <div class="pikachoose">
 	<ul id="pikame" class="jcarousel-skin-pika">
 		<%
+		 String imgURL = request.getParameter("imgURL");
+		System.out.println(imgURL);
+		 String[] IMGURL = imgURL.split("#");
+		 String distance = request.getParameter("distance");
 		for(int i = 0; i< IMGURL.length-1;i++){
 			out.println("<li><a href=\"http://www.pikachoose.com\"><img src=\""+IMGURL[i]+"\"/></a><span>distance:"+distance+"</span></li>");
 		}

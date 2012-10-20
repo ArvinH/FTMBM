@@ -97,6 +97,7 @@ function addMarkerWhenQuery(map,lat,lon,imgUrl,distance){
 	  for(var i = 0; imgUrl[i].length; i++){
 		  imgURL += imgUrl[i].imgURL+"#";
 	  }
+	  console.log(imgURL);
 			  window.frames["photoSlide"].location.href="photoSlide.jsp?imgUrl="+imgURL+"&distance="+distance;
 			  $('#myModal').modal('show');
 			  
@@ -230,10 +231,10 @@ javascript
 					});
 				for(var j=0; j< Result[i].length; j++){
 					//處理每一筆Group的內容
-					console.log(Result[i][j].photoId);
+			/* 		console.log(Result[i][j].photoId);
 					console.log(Result[i][j].latitude);
 					console.log(Result[i][j].longitude);
-					console.log(Result[i][j].imgURL);
+					console.log(Result[i][j].imgURL); */
 				}
 				addMarkerWhenQuery(map,Result[i][0].latitude,Result[i][0].longitude,Result[i],distance);
 		/*		
