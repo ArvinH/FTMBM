@@ -81,7 +81,7 @@ body {
 var map;
 var original_lat;
 var original_lon;
-function addMarkerWhenQuery(map,lat,lon,imgUrl,distance){
+function addMarkerWhenQuery(map,lat,lon,photoID){
 	var myLatlng = new google.maps.LatLng(lat, lon);	
 	var image = 'img/location.png';
 	var imgURL = "";
@@ -94,11 +94,13 @@ function addMarkerWhenQuery(map,lat,lon,imgUrl,distance){
 	  Marker.setMap(map);
 
 	  google.maps.event.addListener(Marker, "click", function() { 
-	  for(var i = 0; imgUrl[i].length; i++){
-		  imgURL += imgUrl[i].imgURL+"#";
+	  for(var i = 0; i< imgUrl.length; i++){
+		  PID += photoID[i].photoId+"#";
+		  console.log(PID);
 	  }
-	  console.log(imgURL);
-			  window.frames["photoSlide"].location.href="photoSlide.jsp?imgUrl="+imgURL+"&distance="+distance;
+	  
+	// console.log(imgURL);
+			  window.frames["photoSlide"].location.href="photoSlide.jsp?PID="+PID;
 			  $('#myModal').modal('show');
 			  
       });
@@ -224,11 +226,11 @@ javascript
 			var distance = 0;
 			for(var i=0; i < Result.length; i++){
 				//處理雙層array
-				$.getJSON('http://maps.googleapis.com/maps/api/distancematrix/json?origins='+original_lat+','+original_lon+'&destinations='+Result[i][0].latitude+','+Result[i][0].longitude,{},
+			/* 	$.getJSON('http://maps.googleapis.com/maps/api/distancematrix/json?origins='+original_lat+','+original_lon+'&destinations='+Result[i][0].latitude+','+Result[i][0].longitude,{},
 							function(Result){
 					distance = Result;
 						//計算好此Group的重心與使用者所在地點的距離
-					});
+					}); */
 				for(var j=0; j< Result[i].length; j++){
 					//處理每一筆Group的內容
 			/* 		console.log(Result[i][j].photoId);
@@ -236,7 +238,7 @@ javascript
 					console.log(Result[i][j].longitude);
 					console.log(Result[i][j].imgURL); */
 				}
-				addMarkerWhenQuery(map,Result[i][0].latitude,Result[i][0].longitude,Result[i],distance);
+				addMarkerWhenQuery(map,Result[i][0].latitude,Result[i][0].longitude,Result[i]);
 		/*		
 			addMarker(map,Result[i].latitude,Result[i].longitude,Result[i].imgUrl);
 			console.log('error');
