@@ -209,7 +209,7 @@ javascript
 	$('#GetInfo')
 			.click(
 					function() {
-						$('#GetInfo').display="none";
+						$('#GetInfo').hide();
 						var i = 0;
 						$
 								.getJSON(
