@@ -17,17 +17,16 @@ body {
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.js"></script>
         <script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
 		<script type="text/javascript" src="js/jquery.pikachoose.js"></script>
-		<script language="javascript">
-			$(document).ready(
-				function (){
-					$("#pikame").PikaChoose({carousel:true});
-				});
+		<script type="text/javascript">
+		
+				function Ready(){
+					$("#pikame").PikaChoose();
+				}
 		</script>
 		<%
 		 String pids = request.getParameter("PID");
 		System.out.println(pids);
 		 String[] PID = pids.split("-");
-		 System.out.println(PID[1]);
 	/* 	for(int i = 0; i< IMGURL.length-1;i++){
 			out.println("<li><a href=\"http://www.pikachoose.com\"><img src=\""+IMGURL[i]+"\"/></a><span></span></li>");
 		} */
@@ -36,10 +35,10 @@ body {
 </head>
 
 <body>
-<!-- not really needed, i'm using it to center the gallery. -->
+<!-- not really needed, i'm using it to center the gallery. class="jcarousel-skin-pika"-->
 <div class="pikachoose">
-	<ul id="pikame" class="jcarousel-skin-pika">
-		
+	<ul id="pikame" >
+	
 	</ul>
 </div>
 </body>
@@ -47,7 +46,14 @@ body {
 <script type="text/javascript">
 var appid = "63d0f7b2e9592d8f5ad413cc5c60e551";
 	var ids = "<%=pids%>";
-	var id = ids.split("-");
+	var id = "";
+	if (ids.indexOf('-')){
+	id = ids.split("-");
+	}
+	else{
+		id = ids;
+		console.log(id);
+	}
 	console.log(id);
 	var url = "";
 	for(var i = 0; i < id.length;i++){
@@ -62,10 +68,14 @@ var appid = "63d0f7b2e9592d8f5ad413cc5c60e551";
 						pserver = data.query.results.photo.server;
 						psecret = data.query.results.photo.secret;
 						url = "http://farm"+pfarm+".staticflickr.com/"+pserver+"/"+pid+"_"+psecret+".jpg";
-						console.log(url);
-						$('.pikachoose ul').append("<li><img src=\""+url+"\"/><span></span></li>");
+					
+						
+							$('.pikachoose #pikame ').append("<li><img src=\""+url+"\"/><span></span></li>");
+						
+						
 					});  
 	}
+	Ready();
 
 </script>
 
