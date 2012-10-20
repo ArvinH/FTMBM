@@ -42,7 +42,7 @@ public class GetPhoto extends HttpServlet {
 	String latitude = null;
 	String longitude = null;
 	String imgUrl = null;
-	ClientTemp client = new ClientTemp("192.168.11.38", Constant.PORT);
+	ClientTemp client = new ClientTemp("10.101.136.32", 9999);
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -109,11 +109,10 @@ public class GetPhoto extends HttpServlet {
 		 latitude = URLDecoder.decode(request.getParameter("latitude"),"UTF-8");
 		 longitude = URLDecoder.decode(request.getParameter("longitude"),"UTF-8");
 		 imgUrl = "http://farm"+farm+".staticflickr.com/"+server+"/"+id+"_"+secret+".jpg";
-
+		 
 		client.ACT001_writeMsg("1#"+latitude+"#"+longitude+"#"+latitude+"#"+longitude+"#"+id+"#"+takendate+"#"+imgUrl+"#"+title+"\n");
 		
-		System.out.println("id: "+id);
-		System.out.println("imgUrl: "+imgUrl);
+		
 	 
 	}
 

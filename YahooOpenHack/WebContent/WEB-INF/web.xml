@@ -9,4 +9,12 @@
     <servlet-name>GetPhoto</servlet-name>
     <url-pattern>/getphoto.do</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>InsertPhotoInfo</servlet-name>
+    <servlet-class>yahooOpenHack.test.servlet.InsertPhotoInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InsertPhotoInfo</servlet-name>
+    <url-pattern>/insertphotoinfo.do</url-pattern>
+  </servlet-mapping>
 </web-app>
