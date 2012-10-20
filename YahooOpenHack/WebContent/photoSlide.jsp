@@ -26,7 +26,7 @@ body {
 		<%
 		 String pids = request.getParameter("PID");
 		System.out.println(pids);
-		 String[] PID = pids.split("#");
+		 String[] PID = pids.split("-");
 		 System.out.println(PID[1]);
 	/* 	for(int i = 0; i< IMGURL.length-1;i++){
 			out.println("<li><a href=\"http://www.pikachoose.com\"><img src=\""+IMGURL[i]+"\"/></a><span></span></li>");
@@ -47,11 +47,13 @@ body {
 
 <script type="text/javascript">
 var appid = "63d0f7b2e9592d8f5ad413cc5c60e551";
-	var ids = <%=pids%>;
-	var id = ids.split('#');
+	var ids = "<%=pids%>";
+	var id = ids.split("-");
+	console.log(id);
 	var url = "";
-	for(var i =0; id.length;i++){
-			$.getJSON('http://query.yahooapis.com/v1/public/yql?q=select title,farm,server,secret from flickr.photos.info where photo_id='
+	for(var i = 0; id.length;i++){
+		
+	/* 		$.getJSON('http://query.yahooapis.com/v1/public/yql?q=select title,farm,server,secret from flickr.photos.info where photo_id='
 					+ id[i]
 					+ ' and api_key=\"'
 					+ appid
@@ -61,8 +63,8 @@ var appid = "63d0f7b2e9592d8f5ad413cc5c60e551";
 						pserver = data.query.results.photo.server;
 						psecret = data.query.results.photo.secret;
 						url = "http://farm"+pfarm+".staticflickr.com/"+pserver+"/"+pid+"_"+psecret+".jpg";
-						$('#pikame').append("<li><a href=\"http://www.pikachoose.com\"><img src=\""+url+"\"/></a><span></span></li>");
-					});
+					//	$('#pikame').append("<li><a href=\"http://www.pikachoose.com\"><img src=\""+url+"\"/></a><span></span></li>");
+					}); */
 	}
 
 </script>

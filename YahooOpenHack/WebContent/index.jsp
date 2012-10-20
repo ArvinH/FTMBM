@@ -84,7 +84,7 @@ var original_lon;
 function addMarkerWhenQuery(map,lat,lon,photoID){
 	var myLatlng = new google.maps.LatLng(lat, lon);	
 	var image = 'img/location.png';
-	var imgURL = "";
+	var PID = "";
 	  var Marker = new google.maps.Marker({
 		  animation: google.maps.Animation.DROP,
 	      position: myLatlng,
@@ -94,9 +94,14 @@ function addMarkerWhenQuery(map,lat,lon,photoID){
 	  Marker.setMap(map);
 
 	  google.maps.event.addListener(Marker, "click", function() { 
-	  for(var i = 0; i< imgUrl.length; i++){
-		  PID += photoID[i].photoId+"#";
+	  for(var i = 0; i< photoID.length; i++){
+		  if(i != photoID.length-1){
+		  PID += photoID[i].photoId+"-";
 		  console.log(PID);
+		  }
+		  else {
+			 PID += photoID[i].photoId;
+		  }
 	  }
 	  
 	// console.log(imgURL);
