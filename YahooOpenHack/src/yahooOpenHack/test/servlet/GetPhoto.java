@@ -59,7 +59,7 @@ public class GetPhoto extends HttpServlet {
 		try{
 			client.ACT001_writeMsg("4\n");
 			while(!client.isFinish()){
-				//System.out.println("\\");
+				System.out.println("\\");
 			} 
 			if(client.getMsg().get(0).equals("nothing found")){
 				System.out.println("nothing found");

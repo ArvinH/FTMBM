@@ -15,10 +15,9 @@ public class ClientTemp extends Thread {
 	private String tempNo = null;
 	private String GroupNo = "0";
 	private Boolean finish = false;
+	private LinkedList<String> tempString = new LinkedList<String>();
 	private LinkedList<String> linkedListInside = new LinkedList<String>();
 	private LinkedList<LinkedList> linkedListOutside = new LinkedList<LinkedList>();
-	private int count = 0;
-	private int isIn = 0;
 	public ClientTemp(String addr, int port)
 	{
 		this.clientSocket = new Socket();
@@ -36,9 +35,13 @@ public class ClientTemp extends Thread {
         	
 	        try {
 	        	DataInputStream reader = new DataInputStream(this.clientSocket.getInputStream());
-	        	while((strMessage = reader.readLine()) != null)
-	        	{
-	        		isIn = 1;
+	        	while((strMessage = reader.readLine()) != null){
+	        		tempString.add(strMessage);
+	        	}
+//	        	while((strMessage = reader.readLine()) != null)
+	 //       	{
+	        	for(int i=0; i < tempString.size(); i++){
+	        	
 	        		tempNo = strMessage.split("#")[0];
 	        		if(!GroupNo.equals(tempNo)){
 	        			GroupNo = tempNo;
@@ -52,7 +55,13 @@ public class ClientTemp extends Thread {
 	        			linkedListInside.add(strMessage);
 	        			System.out.println(strMessage);
 	        		}
-	        	}	    
+	        		if(i == (tempString.size() - 1)){
+	        			finish = true;
+	        		}
+	        	}
+	  //      	}
+	        
+	        	
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -72,7 +81,6 @@ public class ClientTemp extends Thread {
 	}
 	public void clearLinkedList(){
 		linkedListOutside.clear();
-		count = 0;
 	}
 	public void ACT001_writeMsg(String msg)
 	{
