@@ -38,13 +38,7 @@ body {
 
 <!-- google map api lib -->
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<script type="text/javascript"
-	src="https://maps.google.com/maps/api/js?sensor=false">
-</script>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
-	type="text/javascript"></script>
-<script type="text/javascript" src="js/geolocation.js"></script>
+
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
@@ -59,13 +53,11 @@ body {
 		clientIP = "0";
 	}
 %>
-<!-- twitter bootstrap lib -->
+<!-- twitter bootstrap css lib -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
-<script type="text/javascript" src="js/jquery.pikachoose.js"></script>
+
 <!-- google web-font 
 <link href='http://fonts.googleapis.com/css?family=Knewave' rel='stylesheet' type='text/css'>
 -->
@@ -219,7 +211,17 @@ javascript
 
 
  -->
+ <script type="text/javascript"
+	src="https://maps.google.com/maps/api/js?sensor=false">
+</script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+	type="text/javascript"></script>
+<script type="text/javascript" src="js/geolocation.js"></script>
 
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
+<script type="text/javascript" src="js/jquery.pikachoose.js"></script>
 
 <script type="text/javascript">
 	var appid = "63d0f7b2e9592d8f5ad413cc5c60e551";
