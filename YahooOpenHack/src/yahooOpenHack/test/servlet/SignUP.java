@@ -43,7 +43,7 @@ public class SignUP extends HttpServlet {
 		
 		SignUPModel singup = new SignUPModel();
 		singup.insertTable(username, password, gender, age);
-	
+		response.sendRedirect("profile.jsp?username="+username); 
 	}
 
 }

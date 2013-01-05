@@ -44,6 +44,7 @@ public class SignUPModel {
 		try {
 			stmt = conn.createStatement();
 			rsid = stmt.executeQuery("select COUNT(*) as numbers from Member");
+			rsid.next();
 			String currentNumbers = rsid.getString("numbers");
 			if(Integer.parseInt(currentNumbers) == 0){
 				id = 1;
@@ -51,7 +52,8 @@ public class SignUPModel {
 			else {
 				id = Integer.parseInt(currentNumbers) + 1;
 			}
-			stmt.executeUpdate("INSERT INTO Member " + "VALUES ('"+id+"', '"+username+"', '"+passwd+"', '"+gender+"', '"+age+"',NOW(),NOW()");	
+			System.out.println(id+" "+username+" "+passwd+" "+gender+" "+age);
+			stmt.executeUpdate("INSERT INTO Member " + "VALUES ("+id+", '"+username+"', '"+passwd+"', '"+gender+"', '"+age+"',NOW(),NOW())");	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

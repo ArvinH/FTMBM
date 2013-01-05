@@ -19,25 +19,22 @@ body {
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.js"></script>
         <script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
 
-	
+	<% String username = request.getParameter("username"); %>
 </head>
 
 
 
 
 <body>
-
-<div class="span3 well">
-  	<legend>New to FTMBM? Sign up!</legend>
-    <form accept-charset="UTF-8" action="signup.do" method="post">
-        <input class="span3" name="username" placeholder="Username" type="text">
-        <input class="span3" name="password" placeholder="Password" type="password"> 
-        <input class="span3" name="gender" placeholder="gender" type="text">
-        <input class="span3" name="age" placeholder="age" type="text">
-        <button class="btn btn-warning" type="submit">Sign up for FTMBM</button>
-    </form>
+<div class="span4 well">
+	<div class="row">
+		<div class="span1"><a href="http://critterapp.pagodabox.com/others/admin" class="thumbnail"><img src="http://critterapp.pagodabox.com/img/user.jpg" alt=""></a></div>
+		<div class="span3">
+          	<p><strong><%=username %></strong></p>
+			
+		</div>
+	</div>
 </div>
-
 </body>
 
 </html>

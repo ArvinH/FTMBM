@@ -20,7 +20,7 @@ body {
 
 #map_canvas {
 	height: 65%;
-	Top: 22%;
+	Top: 20%;
 }
 .modal-iframe {
 
