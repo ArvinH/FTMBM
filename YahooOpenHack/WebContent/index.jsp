@@ -168,6 +168,47 @@ function googlemapInitialize(){
 
 <body onload="googlemapInitialize()">
 
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<a class="brand" href="#" name="top">FTMBM</a>
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li><a href="#"><i class="icon-home"></i> Home</a></li>								
+					<li class="divider-vertical"></li>
+				</ul>
+				<ul class="nav pull-right">
+					<li><a id="signUp" >Sign Up</a></li>
+                  	<li class="divider-vertical"></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
+						<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+							<form method="post" action="login" accept-charset="UTF-8">
+								<input style="margin-bottom: 15px;" type="text" placeholder="Username" id="username" name="username">
+								<input style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password">
+								<input style="float: left; margin-right: 10px;" type="checkbox" name="remember-me" id="remember-me" value="1">
+								<label class="string optional" for="user_remember_me"> Remember me</label>
+								<input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
+								<label style="text-align:center;margin-top:5px">or</label>
+                                <input class="btn btn-primary btn-block" type="button" id="sign-in-google" value="Sign In with Google">
+								<input class="btn btn-primary btn-block" type="button" id="sign-in-twitter" value="Sign In with Twitter">
+							</form>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+		<!--/.container-fluid -->
+	</div>
+	<!--/.navbar-inner -->
+</div>
+<!--/.navbar -->
 
 	<div id="clientIP" style="display: none"><%=clientIP%></div>
 	<div id="clientTime" style="display: none"><%=time %></div>
@@ -177,7 +218,7 @@ function googlemapInitialize(){
 	</div>
 	<div style="text-align: center; position: relative; Top: 17%">
 		<div class="navbar-form">
-			<input type="text" class="span9"
+			<input type="text" class="span9" id="queryText"
 				placeholder="place, view, people or anything you want to see">
 			<button id="addMarkerTest" type="button" class="btn btn-success" value="addMarker" class="btn">Enter</button>
 			<button id="GetInfo" type="submit" class="btn btn-success">GetInfo</button>
@@ -202,6 +243,18 @@ function googlemapInitialize(){
   </div>
 </div>
 
+<!-- modal for sign up  -->
+<div class="modal hide fade in" id="sign_UP"  style="display: none;" >
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3 style="font-family: 'Arizonia', cursive; font-size: 64px">Photo</h3>
+  </div>
+  <div class="modal-iframe">
+  <iframe class="modal-iframe" name="signUp" src="about:blank" frameborder="0"></iframe>
+  </div>
+  <div class="modal-footer" style="text-align:center">
+  </div>
+</div>
 
 
 </body>
@@ -226,6 +279,12 @@ javascript
 
 <script type="text/javascript">
 	var appid = "63d0f7b2e9592d8f5ad413cc5c60e551";
+	
+	$('#signUp').click(function(){
+		 window.frames["signUp"].location.href="signUp.jsp";
+		  $('#sign_UP').modal('show');
+	});
+	
 	$('#addMarkerTest').click(function(){
 		$.get('getphoto.do',{},function(Result){
 			console.log(original_lat);
@@ -263,12 +322,13 @@ javascript
 			.click(
 					function() {
 						$('#GetInfo').hide();
+						var queryText = $('#queryText').val();
 						var i = 0;
 						$
 								.getJSON(
-										'http://query.yahooapis.com/v1/public/yql?q=select * from flickr.photos.search(0) where text=\"孔廟\" and has_geo=1 and lat=22.993299484253 and lon=120.20359802246 and content_type=1 and api_key=\"'
+										'http://query.yahooapis.com/v1/public/yql?q=select * from flickr.photos.search(0) where text=\"'+queryText+'\" and has_geo=1 and lat=22.993299484253 and lon=120.20359802246 and content_type=1 and api_key=\"'
 												+ appid
-												+ '\" and radius=50 limit 100&format=json',
+												+ '\"limit 100&format=json',
 										function(data) {
 											$.each(
 													data.query.results.photo,
@@ -311,33 +371,5 @@ javascript
 					});
 
 
-/*
-$('#GetInfo')
-.click(
-		function() {
-			$('#GetInfo').hide();
-$.getJSON(
-		'http://query.yahooapis.com/v1/public/yql?q=select id,title,dates.taken,farm,server,id,secret,location.longitude,location.latitude from flickr.photos.info where photo_id in (select id from flickr.photos.search(0) where text=\"sunrise\" and has_geo=1 and lat=22.993299484253 and lon=120.20359802246 and content_type=1 and api_key=\"63d0f7b2e9592d8f5ad413cc5c60e551\" and radius=20 limit=5) and api_key=\"63d0f7b2e9592d8f5ad413cc5c60e551\"&format=json',
-				function(data) {
-					console.log(data.query.results.photo.id+" "+data.query.results.photo.dates.taken+" "+data.query.results.photo.location.latitude+" "+data.query.results.photo.location.longitude);
-					$.get('insertphotoinfo.do',
-									{
-										id : encodeURI(data.query.results.photo.id),
-										title : encodeURI(data.query.results.photo.title),
-										farm : encodeURI(data.query.results.photo.farm),
-										server : encodeURI(data.query.results.photo.server),
-										secret : encodeURI(data.query.results.photo.secret),
-										takendate : encodeURI(data.query.results.photo.dates.taken),
-										latitude : encodeURI(data.query.results.photo.location.latitude),
-										longitude : encodeURI(data.query.results.photo.location.longitude)
-									},
-									function(Result) {
-									//	addMarker(map,Result.latitude,Result.longitude,Result.imgUrl);
-									});
-					
-				});
-
-});
-*/
 </script>
 </html>

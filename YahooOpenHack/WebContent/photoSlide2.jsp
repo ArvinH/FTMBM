@@ -46,12 +46,12 @@ var appid = "63d0f7b2e9592d8f5ad413cc5c60e551";
 						pserver = data.query.results.photo.server;
 						psecret = data.query.results.photo.secret;
 						url = "http://farm"+pfarm+".staticflickr.com/"+pserver+"/"+pid+"_"+psecret+".jpg";
-					   // $('#impress').append(" <div class=\"step slide\" data-x=\""+dataX+"\" data-y=\"-900\"><img src=\""+url+"\"/><span></span></div>");
-					   // dataX+=1000;
+				/*
 					   if(i<4){
-						   console.log(i);
 					   $('#'+i).append("<img src=\""+url+"\"/><span></span>");
 					   }
+				*/
+						 $('#1').append("<img src=\""+url+"\"/><span></span>");
 					});  
 	 		
 	}
@@ -69,28 +69,14 @@ var appid = "63d0f7b2e9592d8f5ad413cc5c60e551";
     <div id="1" class="step slide" data-x="-1000" data-y="-1500">
     </div>
 
-    <div id="2" class="step slide" data-x="0" data-y="-1500">
-       
-    </div>
-
-    <div id="3" class="step slide" data-x="1000" data-y="-1500">
-       
-    </div>
-
    
 
-    <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
-    </div>
  
 </div>
 
 
-<div class="hint">
-    <p>Use a spacebar or arrow keys to navigate</p>
-</div>
+
 </body>
-<script src="assert/js/impress.js"></script>
-<script>impress().init();</script>
 
 
 

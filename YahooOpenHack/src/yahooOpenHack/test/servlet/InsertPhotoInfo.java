@@ -73,7 +73,7 @@ public class InsertPhotoInfo extends HttpServlet {
 			e.printStackTrace();
 		}
 		 
-		if(TimeDiff < 10){
+		if(TimeDiff <= 2){
 		client.ACT001_writeMsg("1#"+latitude+"#"+longitude+"#"+latitude+"#"+longitude+"#"+id+"#"+takendate+"#"+imgUrl+"#"+title+"\n");
 		}
 		

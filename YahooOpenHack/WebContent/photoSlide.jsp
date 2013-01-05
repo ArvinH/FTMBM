@@ -16,30 +16,22 @@ body {
 		<link type="text/css" href="styles/bottom.css" rel="stylesheet" />
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.js"></script>
         <script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
-		<script type="text/javascript" src="js/jquery.pikachoose.js"></script>
-		<script type="text/javascript">
-		
-				function Ready(){
-					$("#pikame").PikaChoose();
-				}
-		</script>
+
 		<%
 		 String pids = request.getParameter("PID");
 		System.out.println(pids);
 		 String[] PID = pids.split("-");
-	/* 	for(int i = 0; i< IMGURL.length-1;i++){
-			out.println("<li><a href=\"http://www.pikachoose.com\"><img src=\""+IMGURL[i]+"\"/></a><span></span></li>");
-		} */
-		
 		%>
 </head>
 
 
 
 <script type="text/javascript">
+
 var appid = "63d0f7b2e9592d8f5ad413cc5c60e551";
 	var ids = "<%=pids%>";
 	var id = "";
+	var urls = new Array();
 	if (ids.indexOf('-')){
 	id = ids.split("-");
 	}
@@ -47,9 +39,11 @@ var appid = "63d0f7b2e9592d8f5ad413cc5c60e551";
 		id = ids;
 	}
 	var url = "";
-
-	for(var i = 0; i < id.length;i++){
-		 
+	//id只有一個的時候可能有問題
+	var i = 0;
+		$.each(
+				id,
+				function() {
 	 		$.getJSON('http://query.yahooapis.com/v1/public/yql?q=select id,title,farm,server,secret from flickr.photos.info where photo_id='
 					+ id[i]
 					+ ' and api_key=\"'
@@ -60,25 +54,23 @@ var appid = "63d0f7b2e9592d8f5ad413cc5c60e551";
 						pserver = data.query.results.photo.server;
 						psecret = data.query.results.photo.secret;
 						url = "http://farm"+pfarm+".staticflickr.com/"+pserver+"/"+pid+"_"+psecret+".jpg";
-					
-						
-							$('.pikachoose #pikame ').append("<img src=\""+url+"\"/><span></span>");
-						
-						
-					});  
-	}
+						urls[i] = url;
+						console.log(i+" "+url);
+						$('#pikame ').append("<img src=\""+url+"\"/><span></span>");
 
-	Ready();
+					});  
+	 			i++;
+				});
+
 
 </script>
 
-<!-- not really needed, i'm using it to center the gallery. class="jcarousel-skin-pika"-->
 <body>
-<div class="pikachoose" style="text-align:center;">
+
 	<div id="pikame" >
 	
 	</div>
-</div>
+
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:javaee="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" id="WebApp_ID" version="2.4">
-  <display-name>Hey Yahoo!</display-name>
+  <javaee:display-name>Hey Yahoo!</javaee:display-name>
   <servlet>
     <servlet-name>GetPhoto</servlet-name>
     <servlet-class>yahooOpenHack.test.servlet.GetPhoto</servlet-class>
@@ -9,12 +9,20 @@
     <servlet-name>GetPhoto</servlet-name>
     <url-pattern>/getphoto.do</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>InsertPhotoInfo</servlet-name>
     <servlet-class>yahooOpenHack.test.servlet.InsertPhotoInfo</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>InsertPhotoInfo</servlet-name>
     <url-pattern>/insertphotoinfo.do</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>SignUP</servlet-name>
+    <servlet-class>yahooOpenHack.test.servlet.SignUP</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SignUP</servlet-name>
+    <url-pattern>/SignUP.do</url-pattern>
   </servlet-mapping>
 </web-app>
