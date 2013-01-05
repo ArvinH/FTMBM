@@ -43,17 +43,7 @@ public class SignUPModel {
 		int id = 0;
 		try {
 			stmt = conn.createStatement();
-			rsid = stmt.executeQuery("select COUNT(*) as numbers from Member");
-			rsid.next();
-			String currentNumbers = rsid.getString("numbers");
-			if(Integer.parseInt(currentNumbers) == 0){
-				id = 1;
-			}
-			else {
-				id = Integer.parseInt(currentNumbers) + 1;
-			}
-			System.out.println(id+" "+username+" "+passwd+" "+gender+" "+age);
-			stmt.executeUpdate("INSERT INTO Member " + "VALUES ("+id+", '"+username+"', '"+passwd+"', '"+gender+"', '"+age+"',NOW(),NOW())");	
+			stmt.executeUpdate("INSERT INTO Member(Name, Pwd, Gender, Age, Register_time, Last_login_time)" + "VALUES ('"+username+"', '"+passwd+"', '"+gender+"', '"+age+"',NOW(),NOW())");	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

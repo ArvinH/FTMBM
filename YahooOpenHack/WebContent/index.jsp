@@ -117,8 +117,8 @@ function addMarker(map,lat,lon,imgUrl,distance){
 	
 	  google.maps.event.addListener(Marker, "click", function() { 
 		 
-			  window.frames["photoSlide"].location.href="photoSlide.jsp?imgUrl="+imgUrl;
-			  $('#myModal').modal('show');
+	//		  window.frames["photoSlide"].location.href="photoSlide.jsp?imgUrl="+imgUrl;
+		//	  $('#myModal').modal('show');
 			  
       });
 	  
@@ -179,7 +179,7 @@ function googlemapInitialize(){
 			<a class="brand" href="#" name="top">FTMBM</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li><a href="#"><i class="icon-home"></i> Home</a></li>								
+					<li><a href="index.jsp"><i class="icon-home"></i> Home</a></li>								
 					<li class="divider-vertical"></li>
 				</ul>
 				<ul class="nav pull-right">
@@ -328,8 +328,9 @@ javascript
 								.getJSON(
 										'http://query.yahooapis.com/v1/public/yql?q=select * from flickr.photos.search(0) where text=\"'+queryText+'\" and has_geo=1 and lat=22.993299484253 and lon=120.20359802246 and content_type=1 and api_key=\"'
 												+ appid
-												+ '\"limit 100&format=json',
+												+ '\"and radius=20 limit 100&format=json',
 										function(data) {
+											
 											$.each(
 													data.query.results.photo,
 													function() {
