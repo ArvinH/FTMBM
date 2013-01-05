@@ -266,9 +266,9 @@ javascript
 						var i = 0;
 						$
 								.getJSON(
-										'http://query.yahooapis.com/v1/public/yql?q=select * from flickr.photos.search(0) where text=\"Taipei 101\" and has_geo=1 and lat=22.993299484253 and lon=120.20359802246 and content_type=1 and api_key=\"'
+										'http://query.yahooapis.com/v1/public/yql?q=select * from flickr.photos.search(0) where text=\"孔廟\" and has_geo=1 and lat=22.993299484253 and lon=120.20359802246 and content_type=1 and api_key=\"'
 												+ appid
-												+ '\" and radius=20 limit 20&format=json',
+												+ '\" and radius=50 limit 100&format=json',
 										function(data) {
 											$.each(
 													data.query.results.photo,
@@ -281,7 +281,7 @@ javascript
 																						+ '\"&format=json',
 																				function(data) {
 																					console.log(data.query.results.photo.id+" "+data.query.results.photo.dates.taken+" "+data.query.results.photo.location.latitude+" "+data.query.results.photo.location.longitude);
-																					var clientTime = $('#clientTime').innerHTML();
+																					var clientTime = $('#clientTime').html();
 																					$.get('insertphotoinfo.do',
 																									{
 																										id : encodeURI(data.query.results.photo.id),

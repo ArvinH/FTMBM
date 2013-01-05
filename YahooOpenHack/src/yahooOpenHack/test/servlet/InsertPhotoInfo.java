@@ -63,15 +63,17 @@ public class InsertPhotoInfo extends HttpServlet {
 		 clientTime = URLDecoder.decode(request.getParameter("clientTime"),"UTF-8");
 		 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		 try {
-			Date CTime = dateFormat.parse("clientTime");
-			Date TTime = dateFormat.parse("takendate");
+			System.out.println(clientTime);
+			Date CTime = dateFormat.parse(clientTime);
+			Date TTime = dateFormat.parse(takendate);
 			TimeDiff = Math.abs(CTime.getHours()-TTime.getHours());
+			System.out.println(TimeDiff);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		 
-		if(TimeDiff < 2){
+		if(TimeDiff < 10){
 		client.ACT001_writeMsg("1#"+latitude+"#"+longitude+"#"+latitude+"#"+longitude+"#"+id+"#"+takendate+"#"+imgUrl+"#"+title+"\n");
 		}
 		
