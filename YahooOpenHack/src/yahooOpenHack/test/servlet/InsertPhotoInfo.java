@@ -2,6 +2,10 @@ package yahooOpenHack.test.servlet;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,6 +33,8 @@ public class InsertPhotoInfo extends HttpServlet {
 	String longitude = null;
 	String imgUrl = null;
 	ClientTemp client = new ClientTemp("192.168.1.221", 9999);
+	String clientTime = null;
+	int TimeDiff;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -54,9 +60,20 @@ public class InsertPhotoInfo extends HttpServlet {
 		 latitude = URLDecoder.decode(request.getParameter("latitude"),"UTF-8");
 		 longitude = URLDecoder.decode(request.getParameter("longitude"),"UTF-8");
 		 imgUrl = "http://farm"+farm+".staticflickr.com/"+server+"/"+id+"_"+secret+".jpg";
+		 clientTime = URLDecoder.decode(request.getParameter("clientTime"),"UTF-8");
+		 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 try {
+			Date CTime = dateFormat.parse("clientTime");
+			Date TTime = dateFormat.parse("takendate");
+			TimeDiff = Math.abs(CTime.getHours()-TTime.getHours());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		 
+		if(TimeDiff < 2){
 		client.ACT001_writeMsg("1#"+latitude+"#"+longitude+"#"+latitude+"#"+longitude+"#"+id+"#"+takendate+"#"+imgUrl+"#"+title+"\n");
-		
+		}
 		
 	}
 

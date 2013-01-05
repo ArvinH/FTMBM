@@ -46,7 +46,7 @@ body {
 	//取client端的ip與日期
 	long start = session.getCreationTime();
 	Date creationTime = new Date(session.getCreationTime());
-	DateFormat dateFormat = new SimpleDateFormat("EE-MM-dd-yyyy");
+	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	String time = dateFormat.format(creationTime);
 	String clientIP = request.getRemoteAddr();
 	if (clientIP.contains("192") || clientIP.contains("0:0:0:0:1")) {
@@ -170,6 +170,7 @@ function googlemapInitialize(){
 
 
 	<div id="clientIP" style="display: none"><%=clientIP%></div>
+	<div id="clientTime" style="display: none"><%=time %></div>
 	<div style="text-align: center; position: relative; Top: 10%">
 		<h3 style="font-family: 'Arizonia', cursive; font-size: 64px">Feel
 			the most beautiful moment</h3>
@@ -265,7 +266,7 @@ javascript
 						var i = 0;
 						$
 								.getJSON(
-										'http://query.yahooapis.com/v1/public/yql?q=select * from flickr.photos.search(0) where text=\"sunrise\" and has_geo=1 and lat=22.993299484253 and lon=120.20359802246 and content_type=1 and api_key=\"'
+										'http://query.yahooapis.com/v1/public/yql?q=select * from flickr.photos.search(0) where text=\"Taipei 101\" and has_geo=1 and lat=22.993299484253 and lon=120.20359802246 and content_type=1 and api_key=\"'
 												+ appid
 												+ '\" and radius=20 limit 20&format=json',
 										function(data) {
@@ -280,6 +281,7 @@ javascript
 																						+ '\"&format=json',
 																				function(data) {
 																					console.log(data.query.results.photo.id+" "+data.query.results.photo.dates.taken+" "+data.query.results.photo.location.latitude+" "+data.query.results.photo.location.longitude);
+																					var clientTime = $('#clientTime').innerHTML();
 																					$.get('insertphotoinfo.do',
 																									{
 																										id : encodeURI(data.query.results.photo.id),
@@ -289,7 +291,8 @@ javascript
 																										secret : encodeURI(data.query.results.photo.secret),
 																										takendate : encodeURI(data.query.results.photo.dates.taken),
 																										latitude : encodeURI(data.query.results.photo.location.latitude),
-																										longitude : encodeURI(data.query.results.photo.location.longitude)
+																										longitude : encodeURI(data.query.results.photo.location.longitude),
+																										clientTime : encodeURI(clientTime)
 																									},
 																									function(Result) {
 																									//	addMarker(map,Result.latitude,Result.longitude,Result.imgUrl);
