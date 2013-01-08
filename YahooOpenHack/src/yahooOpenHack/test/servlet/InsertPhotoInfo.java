@@ -32,7 +32,7 @@ public class InsertPhotoInfo extends HttpServlet {
 	String latitude = null;
 	String longitude = null;
 	String imgUrl = null;
-	ClientTemp client = new ClientTemp("192.168.1.221", 9999);
+	ClientTemp client = new ClientTemp("192.168.1.160", 9999);
 	String clientTime = null;
 	int TimeDiff;
     /**
