@@ -18,7 +18,6 @@ body {
 		<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.js"></script>
         <script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
-
 	
 </head>
 
