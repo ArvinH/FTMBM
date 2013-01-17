@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import yahooOpenHack.test.model.ClientTemp;
+import yahooOpenHack.test.model.InsertDataModel;
 
 /**
  * Servlet implementation class InsertPhotoInfo
@@ -23,6 +24,20 @@ import yahooOpenHack.test.model.ClientTemp;
 @WebServlet("/InsertPhotoInfo")
 public class InsertPhotoInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private String dropTable2 = "DROP TABLE Image ";
+	private String createTable2 = "CREATE TABLE Image (" + 
+			"    GroupId     INTEGER " +
+		    "  , photoId     VARCHAR(30) " +
+			"  , takenTime   VARCHAR(20) " +
+			"  , imgURL      VARCHAR(100) " +
+			"  , longitude   VARCHAR(20) " +
+			"  , latitude    VARCHAR(20) " +
+			"  , distance    VARCHAR(20) " +
+			"  , time        VARCHAR(15)) ";
+	private String insertdbTable2 = "insert into Image(GroupId,photoId,takenTime,imgURL,longitude,latitude,distance,time) " + 
+		      "values(?,?,?,?,?,?,?,?)";
+	private String[] listAttrTable2 = {"GroupId", "photoId", "takenTime", "imgURL", "longitude", "latitude", "distance", "time"};
+	private String[] list = null;
 	String id = null;
 	String title = null;
 	String farm = null;
@@ -35,6 +50,7 @@ public class InsertPhotoInfo extends HttpServlet {
 	ClientTemp client = new ClientTemp("192.168.1.160", 9999);
 	String clientTime = null;
 	int TimeDiff;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -72,9 +88,17 @@ public class InsertPhotoInfo extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 
 		if(TimeDiff <= 2){
-		client.ACT001_writeMsg("1#"+latitude+"#"+longitude+"#"+latitude+"#"+longitude+"#"+id+"#"+takendate+"#"+imgUrl+"#"+title+"\n");
+		list = (latitude+"#"+longitude+"#"+latitude+"#"+longitude+"#"+id+"#"+takendate+"#"+imgUrl+"#"+title).split("#");
+		//懶得改承駿的code，他寫得太複雜= =  之後再改
+		InsertDataModel insertDatamodel = new InsertDataModel();
+			if(insertDatamodel.isExist("Image")) {
+			insertDatamodel.InsertTable(insertdbTable2, list);
+		}
+		else{
+			insertDatamodel.CreateTabel("Image");
+			insertDatamodel.InsertTable(insertdbTable2, list);
+		}
 		}
 		
 	}

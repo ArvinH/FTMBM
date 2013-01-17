@@ -1,4 +1,4 @@
-	package yahooOpenHack.test.model;
+ 	package yahooOpenHack.test.model;
 
 	import java.sql.Connection;
 	import java.sql.DriverManager;
@@ -101,14 +101,14 @@
 			  }
 			  return true;
 		}
-		public void Disconnect(){
+		public void disconnection(){
 			try {
 				if (conn != null) {
 					conn.close();
 					conn = null;
 				}
-			} catch (SQLException e) {
-				System.out.println("Disconnect Exception :" + e.toString());
+			} catch(SQLException e){
+				System.out.println("disconnection Exception :" + e.toString());
 			}
 		}
 		private void Close() {
