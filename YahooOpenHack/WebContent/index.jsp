@@ -357,9 +357,9 @@ javascript
 																									},
 																									function(Result) {
 																									//	addMarker(map,Result.latitude,Result.longitude,Result.imgUrl);
-																									$.post('insertphotoinfo.do',{},function(data){
-																										// sent role 3 to R-tree service
-																									});
+																									// $.post('insertphotoinfo.do',{},function(data){
+																									// 	// sent role 3 to R-tree service
+																									// });
 																								
 																									});
 																					
