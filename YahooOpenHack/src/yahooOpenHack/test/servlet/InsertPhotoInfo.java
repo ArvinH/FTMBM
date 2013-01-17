@@ -77,7 +77,7 @@ public class InsertPhotoInfo extends HttpServlet {
 		 longitude = URLDecoder.decode(request.getParameter("longitude"),"UTF-8");
 		 imgUrl = "http://farm"+farm+".staticflickr.com/"+server+"/"+id+"_"+secret+".jpg";
 		 clientTime = URLDecoder.decode(request.getParameter("clientTime"),"UTF-8");
-		 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 		 try {
 			System.out.println(clientTime);
 			Date CTime = dateFormat.parse(clientTime);
